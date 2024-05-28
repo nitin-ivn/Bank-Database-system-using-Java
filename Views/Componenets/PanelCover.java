@@ -10,12 +10,11 @@ import java.awt.event.ActionListener;
 public class PanelCover extends JPanel{
     private ActionListener event;
     private JButton testing;
+
     public PanelCover(){
         setLayout(new MigLayout("insets 0"));
         testing = new JButton("testing");
         testing.addActionListener(this::jbuttonActionPerfored);
-
-
         add(testing,"pos 220 400");
     }
 

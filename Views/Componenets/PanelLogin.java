@@ -22,7 +22,8 @@ public class PanelLogin extends JLayeredPane {
     JPanel register = new JPanel();
 
     MyButton Registerbutton = new MyButton("Register");
-    MyTextField fullname = new MyTextField();
+    MyTextField FirstName = new MyTextField();
+    MyTextField LastName = new MyTextField();
     MyTextField RAccountNumber = new MyTextField();
     MyTextField RPhoneNumber = new MyTextField();
     MyTextField email = new MyTextField();
@@ -54,8 +55,8 @@ public class PanelLogin extends JLayeredPane {
         register.add(createAccount,"pos 50 50");
 
 
-        fullname.setHint("Full Name");
-        fullname.addKeyListener(new KeyAdapter() {
+        FirstName.setHint("First Name");
+        FirstName.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -64,7 +65,19 @@ public class PanelLogin extends JLayeredPane {
                 }
             }
         });
-        register.add(fullname,"width 400px,pos 50 110");
+        register.add(FirstName,"width 195,pos 50 110");
+
+        LastName.setHint("Last Name");
+        LastName.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
+        register.add(LastName,"width 195,pos 255 110");
 
         RAccountNumber.setHint("Account Number");
         RAccountNumber.addKeyListener(new KeyAdapter() {
