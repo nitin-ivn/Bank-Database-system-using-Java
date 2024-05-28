@@ -52,6 +52,9 @@ public class Pages {
                     fractionCover = fraction;
                     fractionLogin = 1f - fraction;
                 }
+                if(fraction >= 0.5f){
+                    loginRegister.ShowRegister(isLogin);
+                }
                 fractionCover=Double.parseDouble(df.format(fractionCover));
                 fractionLogin=Double.parseDouble(df.format(fractionLogin));
                 layoutforlogin.setComponentConstraints(cover,"width "+size+"%, pos "+fractionCover+"al 0 n 100%");
