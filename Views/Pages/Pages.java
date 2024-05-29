@@ -48,9 +48,19 @@ public class Pages {
                 if(isLogin){
                     fractionCover = 1f - fraction;
                     fractionLogin = fraction;
+                    if(fraction >= 0.5f){
+                        cover.registerRight(fractionCover*100);
+                    }else{
+                        cover.loginRight((1f-fractionCover)*100);
+                    }
                 }else{
                     fractionCover = fraction;
                     fractionLogin = 1f - fraction;
+                    if(fraction <= 0.5f){
+                        cover.registerLeft(fraction * 100);
+                    }else{
+                        cover.loginLeft((1f - fraction)*100);
+                    }
                 }
                 if(fraction >= 0.5f){
                     loginRegister.ShowRegister(isLogin);

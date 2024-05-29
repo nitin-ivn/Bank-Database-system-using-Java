@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 
 public class DOBField extends JFormattedTextField{
@@ -12,10 +14,19 @@ public class DOBField extends JFormattedTextField{
     public DOBField() {
         new SimpleDateFormat("dd/MM/yyyy");
         setSelectionColor(Color.WHITE);
-        setFont(new java.awt.Font("sansserif", 0, 13));
+        setFont(new java.awt.Font("sansserif", Font.PLAIN, 13));
         setBorder(new EmptyBorder(10, 12, 15, 12));
         setBackground(new Color(222, 223, 223));
         setForeground(new Color(80, 80, 80));
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    e.consume();
+                }
+            }
+        });
 
         addFocusListener(new FocusAdapter() {
             @Override

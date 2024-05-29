@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelLogin extends JLayeredPane {
 //    String[] statesAndUTs = {
@@ -32,6 +34,9 @@ public class PanelLogin extends JLayeredPane {
     DOBField dob = new DOBField();
 
     MyButton LoginButton = new MyButton("Login");
+    MyTextField LAccountNumber = new MyTextField();
+    MyPasswordField Lpassword = new MyPasswordField();
+    JLabel forgotpassord = new JLabel("Forgot Your Passoword?");
 
 
     public PanelLogin(){
@@ -128,13 +133,44 @@ public class PanelLogin extends JLayeredPane {
         JLabel LoginAccount = new JLabel("Login");
         LoginAccount.setFont(new Font("sansserif", Font.BOLD,35));
         LoginAccount.setForeground(new Color(71,75,75));
-        login.add(LoginAccount,"pos 50 130");
+        login.add(LoginAccount,"pos 50 160");
 
+        LAccountNumber.setHint("Account Number");
+        LAccountNumber.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(!Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
+        login.add(LAccountNumber,"width 400px, pos 50 220");
+
+        Lpassword.setHint("Password");
+        login.add(Lpassword,"width 400, pos 50 280");
+
+        forgotpassord.setForeground(Color.BLACK);
+        forgotpassord.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null,"Dumb Piece of shit");
+            }
+        });
+        login.add(forgotpassord,"pos 50 340");
 
         LoginButton.setFont(new Font("sansserif",Font.BOLD,18));
         login.add(LoginButton, "width 200,pos 50 370");
-
-
 
     }
 

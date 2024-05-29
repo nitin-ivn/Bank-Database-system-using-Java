@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MyButton extends JButton {
+public class ButtonOutline extends JButton {
 
     public boolean isOver() {
         return over;
@@ -64,7 +64,7 @@ public class MyButton extends JButton {
 
 
 
-    public MyButton(String buttontext) {
+    public ButtonOutline(String buttontext) {
         setText(buttontext);
         color = Color.WHITE;
         setColor(color);
@@ -76,32 +76,12 @@ public class MyButton extends JButton {
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                setBackground(colorClick);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if(over){
-                    setBackground(colorOver);
-                }else{
-                    setBackground(color);
-                }
-            }
-
-            @Override
             public void mouseEntered(MouseEvent e) {
-                setBackground(colorOver);
-                setForeground(color);
-                over = true;
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setBackground(color);
-                setForeground(colorOver);
-                over = false;
                 setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
