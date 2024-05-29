@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class Pages {
+public class LoginAndRegisterPage {
     JLayeredPane bg = new JLayeredPane();
     MigLayout layoutforlogin;
     private PanelCover cover;
@@ -25,7 +25,7 @@ public class Pages {
     private final DecimalFormat df = new DecimalFormat("##0.###");
 
 
-    public void LoginAndRegisterPage() {
+    public LoginAndRegisterPage() {
         bg.setSize(1100,700);
         frame.setContentPane(bg);
         bg.setBackground(Color.WHITE);
