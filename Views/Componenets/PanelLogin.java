@@ -1,7 +1,6 @@
 package Views.Componenets;
 
-import Services.Register;
-import Views.Pages.LoginAndRegisterPage;
+import services.Register;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -23,29 +22,31 @@ public class PanelLogin extends JLayeredPane {
     JPanel login = new JPanel();
     JPanel register = new JPanel();
 
-    public JLabel Labelfullname = new JLabel();
-    JLabel Labellastname = new JLabel();
-    JLabel LabelAccountNumber = new JLabel();
-    JLabel LabelPhoneNo = new JLabel();
-    JLabel LabelDob = new JLabel();
-    JLabel Labelpassword = new JLabel();
-    JLabel LabelConfirmPassowrd = new JLabel();
+    private final Font labelfont = new Font("sansserif", Font.BOLD,10);
 
+    public JLabel Labelfirstname = new JLabel();
+    public JLabel Labellastname = new JLabel();
+    public JLabel LabelAccountNumber = new JLabel();
+    public JLabel LabelPhoneNo = new JLabel();
+    public JLabel LabelDob = new JLabel();
+    public JLabel Labelpassword = new JLabel();
+    public JLabel LabelConfirmPassowrd = new JLabel();
 
+    JLabel clearform = new JLabel();
     MyButton Registerbutton = new MyButton("Register");
     public MyTextField FirstName = new MyTextField();
-    MyTextField LastName = new MyTextField();
-    MyTextField RAccountNumber = new MyTextField();
-    MyTextField RPhoneNumber = new MyTextField();
-    MyTextField email = new MyTextField();
-    MyPasswordField Rpassword = new MyPasswordField();
-    MyPasswordField RconfirmPassword = new MyPasswordField();
-    DOBField dob = new DOBField();
+    public MyTextField LastName = new MyTextField();
+    public MyTextField RAccountNumber = new MyTextField();
+    public MyTextField PhoneNumber = new MyTextField();
+    public MyTextField email = new MyTextField();
+    public MyPasswordField Rpassword = new MyPasswordField();
+    public MyPasswordField RconfirmPassword = new MyPasswordField();
+    public DOBField dob = new DOBField();
 
     MyButton LoginButton = new MyButton("Login");
-    MyTextField LAccountNumber = new MyTextField();
-    MyPasswordField Lpassword = new MyPasswordField();
-    JLabel forgotpassord = new JLabel("Forgot Your Passoword?");
+    public MyTextField LAccountNumber = new MyTextField();
+    public MyPasswordField Lpassword = new MyPasswordField();
+    public JLabel forgotpassord = new JLabel("Forgot Your Passoword?");
 
 
     public PanelLogin(){
@@ -64,7 +65,7 @@ public class PanelLogin extends JLayeredPane {
         register.setLayout(new MigLayout("wrap","",""));
 
         JLabel createAccount = new JLabel("Create Account");
-        createAccount.setFont(new Font("sansserif", Font.BOLD,35));
+        createAccount.setFont(new Font("sansserif",Font.BOLD,35));
         createAccount.setForeground(new Color(71,75,75));
         register.add(createAccount,"pos 50 50");
 
@@ -81,9 +82,9 @@ public class PanelLogin extends JLayeredPane {
         });
         register.add(FirstName,"width 195,pos 50 110");
 
-        Labelfullname.setForeground(Color.RED);
-        Labelfullname.setFont(new Font("sansserif",Font.PLAIN,10));
-        register.add(Labelfullname,"pos 50 155");
+        Labelfirstname.setForeground(Color.RED);
+        Labelfirstname.setFont(labelfont);
+        register.add(Labelfirstname,"pos 50 155");
 
         LastName.setHint("Last Name");
         LastName.addKeyListener(new KeyAdapter() {
@@ -97,6 +98,10 @@ public class PanelLogin extends JLayeredPane {
         });
         register.add(LastName,"width 195,pos 255 110");
 
+        Labellastname.setForeground(Color.RED);
+        Labellastname.setFont(new Font("sansserif",Font.PLAIN,10));
+        register.add(Labellastname,"pos 255 155");
+
         RAccountNumber.setHint("Account Number");
         RAccountNumber.addKeyListener(new KeyAdapter() {
             @Override
@@ -109,8 +114,12 @@ public class PanelLogin extends JLayeredPane {
         });
         register.add(RAccountNumber,"width 400px, pos 50 170");
 
-        RPhoneNumber.setHint("Phone Number");
-        RPhoneNumber.addKeyListener(new KeyAdapter() {
+        LabelAccountNumber.setForeground(Color.RED);
+        LabelAccountNumber.setFont(labelfont);
+        register.add(LabelAccountNumber,"pos 50 215");
+
+        PhoneNumber.setHint("Phone Number");
+        PhoneNumber.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -119,10 +128,18 @@ public class PanelLogin extends JLayeredPane {
                 }
             }
         });
-        register.add(RPhoneNumber,"width 190,pos 50 230");
+        register.add(PhoneNumber,"width 190,pos 50 230");
+
+        LabelPhoneNo.setForeground(Color.RED);
+        LabelPhoneNo.setFont(labelfont);
+        register.add(LabelPhoneNo,"pos 50 275");
 
         dob.setHint("DD/MM/YYYY");
         register.add(dob,"width 200, pos 250 230");
+
+        LabelDob.setForeground(Color.RED);
+        LabelDob.setFont(labelfont);
+        register.add(LabelDob,"pos 250 275");
 
         email.setHint("Email");
         register.add(email,"width 400, pos 50 290");
@@ -131,12 +148,48 @@ public class PanelLogin extends JLayeredPane {
         Rpassword.setHint("Password");
         register.add(Rpassword,"width 400, pos 50 350");
 
+        Labelpassword.setForeground(Color.RED);
+        Labelpassword.setFont(labelfont);
+        register.add(Labelpassword,"pos 50 395");
+
         RconfirmPassword.setHint("Confirm Password");
         register.add(RconfirmPassword,"width 400,pos 50 410");
 
+        LabelConfirmPassowrd.setForeground(Color.RED);
+        LabelConfirmPassowrd.setFont(labelfont);
+        register.add(LabelConfirmPassowrd,"pos 50 455");
+
+        clearform.setText("Clear Form");
+        clearform.setForeground(Color.BLACK);
+        clearform.setFont(new Font("sansserif",Font.BOLD,16));
+        clearform.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                FirstName.setText("");
+                LastName.setText("");
+                RAccountNumber.setText("");
+                PhoneNumber.setText("");
+                dob.setText("");
+                email.setText("");
+                Rpassword.setText("");
+                RconfirmPassword.setText("");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+            }
+        });
+        register.add(clearform,"pos 50 475");
+
         Registerbutton.addActionListener(new RegisterButtonListener());
         Registerbutton.setFont(new Font("sansserif",Font.BOLD,18));
-        register.add(Registerbutton,"width 200, height 50px, pos 50 500");
+        register.add(Registerbutton,"width 200, height 50px, pos 50 510");
 
     }
 
@@ -165,6 +218,7 @@ public class PanelLogin extends JLayeredPane {
         login.add(Lpassword,"width 400, pos 50 280");
 
         forgotpassord.setForeground(Color.BLACK);
+        forgotpassord.setFont(new Font("sansserif",Font.BOLD,14));
         forgotpassord.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

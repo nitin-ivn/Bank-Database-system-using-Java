@@ -1,5 +1,5 @@
 package Views.Pages;
-import Services.Register;
+import services.Register;
 import Views.Componenets.PanelCover;
 import Views.Componenets.PanelLogin;
 import net.miginfocom.swing.MigLayout;
