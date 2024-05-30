@@ -1,13 +1,12 @@
 package Views.Componenets;
 
+import Services.Register;
+import Views.Pages.LoginAndRegisterPage;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class PanelLogin extends JLayeredPane {
 //    String[] statesAndUTs = {
@@ -20,11 +19,21 @@ public class PanelLogin extends JLayeredPane {
 //            "Delhi", "Lakshadweep", "Puducherry", "Ladakh", "Jammu and Kashmir"
 //    };
 
+
     JPanel login = new JPanel();
     JPanel register = new JPanel();
 
+    public JLabel Labelfullname = new JLabel();
+    JLabel Labellastname = new JLabel();
+    JLabel LabelAccountNumber = new JLabel();
+    JLabel LabelPhoneNo = new JLabel();
+    JLabel LabelDob = new JLabel();
+    JLabel Labelpassword = new JLabel();
+    JLabel LabelConfirmPassowrd = new JLabel();
+
+
     MyButton Registerbutton = new MyButton("Register");
-    MyTextField FirstName = new MyTextField();
+    public MyTextField FirstName = new MyTextField();
     MyTextField LastName = new MyTextField();
     MyTextField RAccountNumber = new MyTextField();
     MyTextField RPhoneNumber = new MyTextField();
@@ -71,6 +80,10 @@ public class PanelLogin extends JLayeredPane {
             }
         });
         register.add(FirstName,"width 195,pos 50 110");
+
+        Labelfullname.setForeground(Color.RED);
+        Labelfullname.setFont(new Font("sansserif",Font.PLAIN,10));
+        register.add(Labelfullname,"pos 50 155");
 
         LastName.setHint("Last Name");
         LastName.addKeyListener(new KeyAdapter() {
@@ -121,6 +134,7 @@ public class PanelLogin extends JLayeredPane {
         RconfirmPassword.setHint("Confirm Password");
         register.add(RconfirmPassword,"width 400,pos 50 410");
 
+        Registerbutton.addActionListener(new RegisterButtonListener());
         Registerbutton.setFont(new Font("sansserif",Font.BOLD,18));
         register.add(Registerbutton,"width 200, height 50px, pos 50 500");
 
@@ -183,4 +197,12 @@ public class PanelLogin extends JLayeredPane {
             login.setVisible(true);
         }
     }
+    class RegisterButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Register register1 = new Register(PanelLogin.this);
+            register1.SetHomePage();
+        }
+    }
+
 }

@@ -1,4 +1,5 @@
 package Views.Pages;
+import Services.Register;
 import Views.Componenets.PanelCover;
 import Views.Componenets.PanelLogin;
 import net.miginfocom.swing.MigLayout;
@@ -98,4 +99,5 @@ public class LoginAndRegisterPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
 }
