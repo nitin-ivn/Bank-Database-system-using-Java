@@ -1,5 +1,6 @@
 package Views.Componenets;
 
+import services.Login;
 import services.Register;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,6 +24,9 @@ public class PanelLogin extends JLayeredPane {
     JPanel register = new JPanel();
 
     private final Font labelfont = new Font("sansserif", Font.BOLD,10);
+
+    public JLabel LabelAccno = new JLabel();
+    public JLabel Labelpass = new JLabel();
 
     public JLabel Labelfirstname = new JLabel();
     public JLabel Labellastname = new JLabel();
@@ -214,8 +218,16 @@ public class PanelLogin extends JLayeredPane {
         });
         login.add(LAccountNumber,"width 400px, pos 50 220");
 
+        LabelAccno.setForeground(Color.RED);
+        LabelAccno.setFont(labelfont);
+        login.add(LabelAccno,"pos 50 265");
+
         Lpassword.setHint("Password");
         login.add(Lpassword,"width 400, pos 50 280");
+
+        Labelpass.setForeground(Color.RED);
+        Labelpass.setFont(labelfont);
+        login.add(Labelpass,"pos 50 325");
 
         forgotpassord.setForeground(Color.BLACK);
         forgotpassord.setFont(new Font("sansserif",Font.BOLD,14));
@@ -237,6 +249,7 @@ public class PanelLogin extends JLayeredPane {
         });
         login.add(forgotpassord,"pos 50 340");
 
+        LoginButton.addActionListener(new LoginButtonListener());
         LoginButton.setFont(new Font("sansserif",Font.BOLD,18));
         login.add(LoginButton, "width 200,pos 50 370");
 
@@ -256,6 +269,14 @@ public class PanelLogin extends JLayeredPane {
         public void actionPerformed(ActionEvent e) {
             Register register1 = new Register(PanelLogin.this);
             register1.SetHomePage();
+        }
+    }
+
+    class LoginButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Login login1 = new Login(PanelLogin.this);
+            login1.SetHomePage();
         }
     }
 

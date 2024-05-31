@@ -50,7 +50,7 @@ public class PanelCover extends JPanel{
         description1.setFont(new Font("sansserif",Font.BOLD,14));
         add(description1,"pos 50 400");
 
-        imageIcon = new ImageIcon("C:\\Sai Nitin\\Projects\\Bank-Database-system-using-Java\\Icons\\bankimage.png");
+        imageIcon = new ImageIcon("Icons/bankimage.png");
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);

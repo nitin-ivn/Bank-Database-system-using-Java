@@ -75,7 +75,7 @@ public class Register {
 
     public void SetHomePage(){
         if(formfilled()){
-            JOptionPane.showMessageDialog(panelLogin,"Nigga");
+            JOptionPane.showMessageDialog(panelLogin,"Details are set");
         }
     }
 }
