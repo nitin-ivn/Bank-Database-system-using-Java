@@ -8,6 +8,6 @@ public class Deposit {
     public int Amount;
     public Date DateOfDeposit;
     public Time TimeOfDeposit;
-    public int AccountNumberOfDepositer;
-    public int AccountNumberOfReciever;
+    public long AccountNumberOfDepositer;
+    public long AccountNumberOfReciever;
 }

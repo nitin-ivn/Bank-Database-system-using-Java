@@ -1,7 +1,7 @@
 package Model;
 
 public class LoginDetails {
-    public int AccountNumber;
+    public long AccountNumber;
     public String password;
     public boolean LoginDetails;
 

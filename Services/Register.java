@@ -1,10 +1,18 @@
 package services;
+import Model.RegisterDetails;
 import Views.Componenets.PanelLogin;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 public class Register {
+    Database database = new Database();
     PanelLogin panelLogin;
+    RegisterDetails registerDetails = new RegisterDetails();
+    ArrayList<Long> accountnum;
 
     public Register(PanelLogin panelLogin) {
         this.panelLogin = panelLogin;
@@ -75,7 +83,52 @@ public class Register {
 
     public void SetHomePage(){
         if(formfilled()){
-            JOptionPane.showMessageDialog(panelLogin,"Details are set");
+            accountnum = database.getAccountNumbers();
+            if(getRegisterDetails() && validateRegister(accountnum)) {
+                database.InsertRegisterDetails(registerDetails);
+                JOptionPane.showMessageDialog(panelLogin, registerDetails.FirstName);
+            }
         }
+    }
+
+    private boolean getRegisterDetails() {
+        registerDetails.FirstName = panelLogin.FirstName.getText();
+        registerDetails.LastName = panelLogin.LastName.getText();
+        registerDetails.PhoneNumber = Long.parseLong(panelLogin.PhoneNumber.getText());
+        registerDetails.AccountNumber = Long.parseLong(panelLogin.RAccountNumber.getText());
+        registerDetails.Email = panelLogin.email.getText();
+
+
+        String datestr = panelLogin.dob.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = sdf.parse(datestr);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(panelLogin, "Please Enter a Valid Date.");
+            return false;
+        }
+        registerDetails.DOB = date;
+
+        registerDetails.Password = panelLogin.Rpassword.getText();
+        return true;
+    }
+
+    private boolean validateRegister(ArrayList<Long> accountnum){
+        boolean passcorrect = false;
+        boolean accExists = accountnum.contains(registerDetails.AccountNumber);
+
+
+        if(Objects.equals(registerDetails.Password, panelLogin.RconfirmPassword.getText())){
+            passcorrect = true;
+        }else{
+            JOptionPane.showMessageDialog(panelLogin,"Please Enter Same Password.");
+        }
+
+        if(!accExists){
+            JOptionPane.showMessageDialog(panelLogin,"Please Enter a Valid Account Number");
+        }
+
+        return accExists && passcorrect;
     }
 }

@@ -95,6 +95,7 @@ public class LoginAndRegisterPage {
 
         frame.add(loginRegister,"width "+loginsize+"%, pos 1al 0 n 100%");
 
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
