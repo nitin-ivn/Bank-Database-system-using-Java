@@ -1,10 +1,14 @@
 package services;
 
+import Model.LoginDetails;
 import Views.Componenets.PanelLogin;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Login {
+    LoginDetails loginDetails = new LoginDetails();
+    Database database = new Database();
     PanelLogin panelLogin;
 
 
@@ -31,7 +35,32 @@ public class Login {
 
     public void SetHomePage(){
         if(formfilled()){
-            JOptionPane.showMessageDialog(panelLogin,"Details are set");
+            getLoginDetails();
+            if(ValidateLogin()) {
+                JOptionPane.showMessageDialog(panelLogin, "Details are set");
+            }
         }
+    }
+    public void getLoginDetails(){
+        loginDetails.AccountNumber = Long.parseLong(panelLogin.LAccountNumber.getText());
+        loginDetails.password = panelLogin.Lpassword.getText();
+    }
+
+    public boolean ValidateLogin(){
+        ArrayList<Long> accountnum = database.getAccountNumbers();
+
+        if(!(accountnum.contains(loginDetails.AccountNumber))){
+            JOptionPane.showMessageDialog(panelLogin,"Please Enter a Valid Account Number");
+            return false;
+        }
+        if(!(database.getIfRegistered(loginDetails.AccountNumber))){
+            JOptionPane.showMessageDialog(panelLogin,"Given Account Number doesn't have a online account.Please create one");
+            return false;
+        }
+        if(!(database.ValidateLoginPassword(loginDetails.password,loginDetails.AccountNumber))){
+            JOptionPane.showMessageDialog(panelLogin,"Password seems to be wrong");
+            return false;
+        }
+        return true;
     }
 }

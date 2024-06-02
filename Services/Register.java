@@ -84,9 +84,9 @@ public class Register {
     public void SetHomePage(){
         if(formfilled()){
             accountnum = database.getAccountNumbers();
-            if(getRegisterDetails() && validateRegister(accountnum)) {
+            if(getRegisterDetails() && validateRegister(accountnum, database.getIfRegistered(registerDetails.AccountNumber))) {
                 database.InsertRegisterDetails(registerDetails);
-                JOptionPane.showMessageDialog(panelLogin, registerDetails.FirstName);
+                JOptionPane.showMessageDialog(panelLogin, "details are correct");
             }
         }
     }
@@ -101,7 +101,7 @@ public class Register {
 
         String datestr = panelLogin.dob.getText();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = null;
+        Date date;
         try {
             date = sdf.parse(datestr);
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class Register {
         return true;
     }
 
-    private boolean validateRegister(ArrayList<Long> accountnum){
+    private boolean validateRegister(ArrayList<Long> accountnum, boolean isRegistered){
         boolean passcorrect = false;
         boolean accExists = accountnum.contains(registerDetails.AccountNumber);
 
@@ -128,7 +128,9 @@ public class Register {
         if(!accExists){
             JOptionPane.showMessageDialog(panelLogin,"Please Enter a Valid Account Number");
         }
-
-        return accExists && passcorrect;
+       if(isRegistered){
+           JOptionPane.showMessageDialog(panelLogin,"An Account already exists with the given Account Number");
+       }
+        return accExists && passcorrect && !isRegistered;
     }
 }
