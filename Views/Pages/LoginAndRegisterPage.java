@@ -19,14 +19,14 @@ public class LoginAndRegisterPage {
     private PanelCover cover;
     private PanelLogin loginRegister;
     private boolean isLogin;
-    JFrame frame = new JFrame("Bank");
+    public JFrame frame = new JFrame("Bank");
     private final int coversize = 50;
     private final int loginsize = 50;
     private final int addsize = 30;
     private final DecimalFormat df = new DecimalFormat("##0.###");
 
 
-    public LoginAndRegisterPage() {
+    public void gui() {
         bg.setSize(1100,700);
         frame.setContentPane(bg);
         bg.setBackground(Color.WHITE);
@@ -100,5 +100,14 @@ public class LoginAndRegisterPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+    public PanelLogin getpanel(){
+        return loginRegister.getloginpanel();
+    }
+    public void setLoginButtonActionListener(ActionListener listener) {
+        loginRegister.getLoginButton().addActionListener(listener);
+    }
 
+    public void setRegisterButtonActionListener(ActionListener listener) {
+        loginRegister.getRegisterButton().addActionListener(listener);
+    }
 }

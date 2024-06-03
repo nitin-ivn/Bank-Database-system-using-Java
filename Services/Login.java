@@ -2,6 +2,8 @@ package services;
 
 import Model.LoginDetails;
 import Views.Componenets.PanelLogin;
+import Views.Pages.LoginAndRegisterPage;
+import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -33,13 +35,14 @@ public class Login {
         return true;
     }
 
-    public void SetHomePage(){
+    public boolean SetHomePage(){
         if(formfilled()){
             getLoginDetails();
             if(ValidateLogin()) {
-                JOptionPane.showMessageDialog(panelLogin, "Details are set");
+                return true;
             }
         }
+        return false;
     }
     public void getLoginDetails(){
         loginDetails.AccountNumber = Long.parseLong(panelLogin.LAccountNumber.getText());
@@ -63,4 +66,6 @@ public class Login {
         }
         return true;
     }
+
+
 }

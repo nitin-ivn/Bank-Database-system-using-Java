@@ -58,18 +58,19 @@ public class Database {
 
     public void InsertRegisterDetails(RegisterDetails registerDetails){
             try{
-                String query = "UPDATE User_Details SET User_FirstName = ?, USER_LastName = ?,User_PhoneNo = ?,User_email = ?,User_Balance = 1000,User_DOB = ?,Registered = 1 WHERE Account_Number = ?";
+                String query = "UPDATE User_Details SET User_FirstName = ?, USER_LastName = ?,User_PhoneNo = ?,User_email = ?,User_Password = ?,User_Balance = 1000,User_DOB = ?,Registered = 1 WHERE Account_Number = ?";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1,registerDetails.FirstName);
                 statement.setString(2,registerDetails.LastName);
                 statement.setLong(3,registerDetails.PhoneNumber);
                 statement.setString(4,registerDetails.Email);
+                statement.setString(5,registerDetails.Password);
 
                 java.sql.Date sqldate = new java.sql.Date(registerDetails.DOB.getTime());
-                statement.setDate(5,sqldate);
+                statement.setDate(6,sqldate);
 
-                statement.setLong(6,registerDetails.AccountNumber);
-                statement.executeQuery();
+                statement.setLong(7,registerDetails.AccountNumber);
+                int rowsaffected = statement.executeUpdate();
 
             }catch (Exception e){
                 System.out.println(e.getMessage());

@@ -191,7 +191,6 @@ public class PanelLogin extends JLayeredPane {
         });
         register.add(clearform,"pos 50 475");
 
-        Registerbutton.addActionListener(new RegisterButtonListener());
         Registerbutton.setFont(new Font("sansserif",Font.BOLD,18));
         register.add(Registerbutton,"width 200, height 50px, pos 50 510");
 
@@ -249,7 +248,6 @@ public class PanelLogin extends JLayeredPane {
         });
         login.add(forgotpassord,"pos 50 340");
 
-        LoginButton.addActionListener(new LoginButtonListener());
         LoginButton.setFont(new Font("sansserif",Font.BOLD,18));
         login.add(LoginButton, "width 200,pos 50 370");
 
@@ -264,20 +262,32 @@ public class PanelLogin extends JLayeredPane {
             login.setVisible(true);
         }
     }
-    class RegisterButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Register register1 = new Register(PanelLogin.this);
-            register1.SetHomePage();
-        }
+    public JButton getLoginButton(){
+        return LoginButton;
     }
 
-    class LoginButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Login login1 = new Login(PanelLogin.this);
-            login1.SetHomePage();
-        }
+    public JButton getRegisterButton(){
+        return Registerbutton;
     }
+
+    public PanelLogin getloginpanel(){
+        return PanelLogin.this;
+    }
+
+//    class RegisterButtonListener implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            Register register1 = new Register(PanelLogin.this);
+//            register1.SetHomePage();
+//        }
+//    }
+//
+//    class LoginButtonListener implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            Login login1 = new Login(PanelLogin.this);
+//            login1.SetHomePage();
+//        }
+//    }
 
 }

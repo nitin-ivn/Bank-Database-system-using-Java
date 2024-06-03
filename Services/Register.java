@@ -81,14 +81,15 @@ public class Register {
             return true;
     }
 
-    public void SetHomePage(){
+    public boolean SetHomePage(){
         if(formfilled()){
             accountnum = database.getAccountNumbers();
             if(getRegisterDetails() && validateRegister(accountnum, database.getIfRegistered(registerDetails.AccountNumber))) {
                 database.InsertRegisterDetails(registerDetails);
-                JOptionPane.showMessageDialog(panelLogin, "details are correct");
+                return true;
             }
         }
+        return false;
     }
 
     private boolean getRegisterDetails() {
