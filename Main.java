@@ -8,8 +8,9 @@ import java.awt.event.ActionListener;
 
 public class Main {
     static LoginAndRegisterPage loginAndRegisterPage;
+    static HomePage homepage;
     public static void main(String[] args) {
-        new HomePage();
+        setHomepage();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
@@ -20,7 +21,7 @@ public class Main {
                 Login login1 = new Login(loginAndRegisterPage.getpanel());
                 if(login1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
-                    new HomePage();
+                    setHomepage();
                 }
             }
         });
@@ -30,8 +31,19 @@ public class Main {
                 Register register1 = new Register(loginAndRegisterPage.getpanel());
                 if(register1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
-                    new HomePage();
+                    setHomepage();
                 }
+            }
+        });
+    }
+
+    public static void setHomepage(){
+        homepage = new HomePage();
+        homepage.LogoutButtonActionPerformed(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                homepage.frame.dispose();
+                Loginpage();
             }
         });
     }

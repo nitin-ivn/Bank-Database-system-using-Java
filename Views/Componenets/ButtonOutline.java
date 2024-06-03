@@ -64,13 +64,14 @@ public class ButtonOutline extends JButton {
 
 
 
-    public ButtonOutline(String buttontext) {
+    public ButtonOutline(String buttontext,int buttonstyle) {
+        if(buttonstyle == 0){
         setText(buttontext);
         color = Color.WHITE;
         setColor(color);
-        colorOver = new Color(71,75,75);
+        colorOver = new Color(71, 75, 75);
         colorClick = new Color(54, 56, 56);
-        borderColor = new Color(71,75,75);
+        borderColor = new Color(71, 75, 75);
         setFocusable(false);
         setContentAreaFilled(false);
 
@@ -85,6 +86,32 @@ public class ButtonOutline extends JButton {
                 setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
+    } else if (buttonstyle == 1) {
+            setText(buttontext);
+            color = Color.WHITE;
+            setColor(color);
+
+            colorOver = new Color(71,75,75);
+            colorClick = new Color(54, 56, 56);
+            borderColor = new Color(71,75,75);
+            setFocusable(false);
+            setContentAreaFilled(false);
+
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setBackground(new Color(59,63,63));
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setBackground(new Color(64,67,67));
+                    setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                }
+            });
+
+        }
     }
 
     public void paintComponent(Graphics g) {
