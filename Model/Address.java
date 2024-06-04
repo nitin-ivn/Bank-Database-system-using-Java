@@ -5,5 +5,6 @@ public class Address {
     public String Colony;
     public String City;
     public String State;
-    public final String Country = "India";
+    public int Pincode;
+    public String Country;
 }

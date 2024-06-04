@@ -1,5 +1,7 @@
+import Model.UserDetails;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
+import services.Database;
 import services.Login;
 import services.Register;
 
@@ -22,6 +24,7 @@ public class Main {
                 if(login1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
                     setHomepage();
+                    Database.setUserDetails(login1.getAccNumber());
                 }
             }
         });
@@ -32,6 +35,7 @@ public class Main {
                 if(register1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
                     setHomepage();
+                    Database.setUserDetails(register1.getAccNumber());
                 }
             }
         });

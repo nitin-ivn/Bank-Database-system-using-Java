@@ -9,15 +9,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class PanelLogin extends JLayeredPane {
-//    String[] statesAndUTs = {
-//            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-//            "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-//            "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-//            "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-//            "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-//            "Uttar Pradesh", "Uttarakhand", "West Bengal", "Chandigarh",
-//            "Delhi", "Lakshadweep", "Puducherry", "Ladakh", "Jammu and Kashmir"
-//    };
 
 
     JPanel login = new JPanel();
@@ -274,20 +265,5 @@ public class PanelLogin extends JLayeredPane {
         return PanelLogin.this;
     }
 
-//    class RegisterButtonListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            Register register1 = new Register(PanelLogin.this);
-//            register1.SetHomePage();
-//        }
-//    }
-//
-//    class LoginButtonListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            Login login1 = new Login(PanelLogin.this);
-//            login1.SetHomePage();
-//        }
-//    }
 
 }

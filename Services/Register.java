@@ -134,4 +134,7 @@ public class Register {
        }
         return accExists && passcorrect && !isRegistered;
     }
+    public long getAccNumber(){
+        return registerDetails.AccountNumber;
+    }
 }

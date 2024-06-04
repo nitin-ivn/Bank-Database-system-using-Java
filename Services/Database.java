@@ -2,6 +2,7 @@ package services;
 
 
 import Model.RegisterDetails;
+import Model.UserDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class Database {
     final String url = "jdbc:mysql://127.0.0.1:3306/Bank";
     final String username = "root";
     final String password = "database";
+    public static UserDetails userDetails = new UserDetails();
     Connection connection;
 
     public Database(){
@@ -93,5 +95,33 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return validpassword;
+    }
+
+    public static UserDetails GetUserDetails(){
+        return userDetails;
+    }
+
+    public static void setUserDetails(long Accountnum){
+        try {
+            String url = "jdbc:mysql://127.0.0.1:3306/Bank";
+            String username = "root";
+            String password = "database";
+            Connection connection1 = DriverManager.getConnection(url,username,password);
+            String query = "SELECT * FROM User_Details WHERE Account_Number = ?";
+            PreparedStatement statement = connection1.prepareStatement(query);
+            statement.setLong(1,Accountnum);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                userDetails.FirstName = rs.getString("User_FirstName");
+                userDetails.LastName = rs.getString("User_LastName");
+                userDetails.PhoneNo = rs.getLong("User_PhoneNo");
+                userDetails.Email = rs.getString("User_email");
+                userDetails.DOB = rs.getDate("User_DOB");
+                userDetails.Balance = rs.getInt("User_Balance");
+                userDetails.AccountNumber = Accountnum;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

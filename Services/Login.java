@@ -66,6 +66,8 @@ public class Login {
         }
         return true;
     }
-
+    public long getAccNumber(){
+        return loginDetails.AccountNumber;
+    }
 
 }
