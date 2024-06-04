@@ -7,6 +7,8 @@ import services.Database;
 import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProfilePanel extends JPanel{
         UserDetails userDetails;
@@ -32,9 +34,28 @@ public class ProfilePanel extends JPanel{
     MyTextField country = new MyTextField();
     MyButton setAddress = new MyButton("Update Address");
 
-    JLabel Userdetail = new JLabel("User Details");
+    JLabel user = new JLabel("User Details");
+    MyTextField firstname = new MyTextField();
+    MyTextField lastname = new MyTextField();
+    MyTextField phoneno = new MyTextField();
+    MyTextField email = new MyTextField();
+    MyButton UpdateDetails = new MyButton("Update");
 
-    public ProfilePanel(){
+    JLabel pass = new JLabel("Password");
+    MyPasswordField passwordField = new MyPasswordField();
+    MyPasswordField confirmpasswordField = new MyPasswordField();
+    MyButton UpdatePassword = new MyButton("Update");
+
+    JLabel resetpin = new JLabel("Reset Pin");
+    MyTextField pin = new MyTextField();
+    MyTextField confirmpin = new MyTextField();
+    MyButton Setpin = new MyButton("Set Pin");
+
+    ButtonOutline DeleteAccount = new ButtonOutline("Delete Account",0);
+
+    public ProfilePanel(UserDetails userDetails){
+        setBackground(Color.WHITE);
+        this.userDetails = userDetails;
         setLayout(new MigLayout("fill"));
 
         title.setForeground(bgcolor);
@@ -67,8 +88,58 @@ public class ProfilePanel extends JPanel{
         add(country,"width 160, pos 197 230");
 
         setAddress.setFont(new Font("sansserif",Font.BOLD,18));
-        add(setAddress,"width 100, height 40,pos 30 300");
+        add(setAddress,"width 100, height 40,pos 30 285");
 
+        user.setForeground(bgcolor);
+        user.setFont(new Font("sansserif",Font.BOLD,30));
+        add(user,"pos 400 85");
+
+        firstname.setHint("First Name");
+        add(firstname,"width 147,pos 400 130");
+
+        lastname.setHint("Last Name");
+        add(lastname,"width 147,pos 553 130");
+
+        phoneno.setHint("Phone Number");
+        add(phoneno,"width 300,pos 400 180");
+
+        email.setHint("Email");
+        add(email,"width 300,pos 400 230");
+
+        UpdateDetails.setFont(new Font("sansserif",Font.BOLD,18));
+        add(UpdateDetails,"width 100, height 40,pos 400 285");
+
+        resetpin.setForeground(bgcolor);
+        resetpin.setFont(new Font("sansserif",Font.BOLD,28));
+        add(resetpin,"pos 30 360");
+
+        pin.setHint("New Pin");
+        add(pin,"width 320,pos 30 410");
+
+        confirmpin.setHint("Confirm New Pin");
+        add(confirmpin,"width 320,pos 30 460");
+
+        Setpin.setFont(new Font("sansserif",Font.BOLD,18));
+        add(Setpin,"width 100, height 40,pos 30 515");
+
+        pass.setFont(new Font("sansserif",Font.BOLD,28));
+        pass.setForeground(bgcolor);
+        add(pass,"pos 400 360");
+
+        passwordField.setHint("New Password");
+        add(passwordField,"width 300,pos 400 410");
+
+        confirmpasswordField.setHint("Confirm New Password");
+        add(confirmpasswordField,"width 300, pos 400 460");
+
+        UpdatePassword.setFont(new Font("sansserif",Font.BOLD,18));
+        add(UpdatePassword,"width 100,height 40,pos 400 515");
+
+        DeleteAccount.setForeground(Color.RED);
+        DeleteAccount.setBackground(Color.WHITE);
+        DeleteAccount.setBorderColor(Color.RED);
+        DeleteAccount.setFont(new Font("sansserif",Font.BOLD,12));
+        add(DeleteAccount,"width 100,height 30,pos 580 585");
     }
 
 }

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 public class Main {
     static LoginAndRegisterPage loginAndRegisterPage;
     static HomePage homepage;
+    static UserDetails userDetails;
     public static void main(String[] args) {
         setHomepage();
     }
@@ -23,8 +24,9 @@ public class Main {
                 Login login1 = new Login(loginAndRegisterPage.getpanel());
                 if(login1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
+                    userDetails = Database.setUserDetails(login1.getAccNumber());
                     setHomepage();
-                    Database.setUserDetails(login1.getAccNumber());
+
                 }
             }
         });
@@ -34,15 +36,15 @@ public class Main {
                 Register register1 = new Register(loginAndRegisterPage.getpanel());
                 if(register1.SetHomePage()){
                     loginAndRegisterPage.frame.dispose();
+                    userDetails = Database.setUserDetails(register1.getAccNumber());
                     setHomepage();
-                    Database.setUserDetails(register1.getAccNumber());
                 }
             }
         });
     }
 
     public static void setHomepage(){
-        homepage = new HomePage();
+        homepage = new HomePage(userDetails);
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

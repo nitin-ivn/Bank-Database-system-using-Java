@@ -101,7 +101,7 @@ public class Database {
         return userDetails;
     }
 
-    public static void setUserDetails(long Accountnum){
+    public static UserDetails setUserDetails(long Accountnum){
         try {
             String url = "jdbc:mysql://127.0.0.1:3306/Bank";
             String username = "root";
@@ -123,5 +123,6 @@ public class Database {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+        return userDetails;
     }
 }

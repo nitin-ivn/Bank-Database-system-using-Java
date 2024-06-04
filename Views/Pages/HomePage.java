@@ -1,5 +1,6 @@
 package Views.Pages;
 
+import Model.UserDetails;
 import Views.Componenets.*;
 import net.miginfocom.swing.MigLayout;
 import services.Database;
@@ -12,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HomePage {
+    UserDetails userDetails;
+
     Color bgcolor = new Color(71,75,75);
     ImageIcon imageIcon;
     JLabel bankimage;
@@ -25,15 +28,16 @@ public class HomePage {
     ButtonOutline LogoutButton = new ButtonOutline("Log Out", 0);
 
     AccountDetailsPanel accountspanel = new AccountDetailsPanel();
-    DepositPanel depositPanel = new DepositPanel();
-    WithdrawPanel withdrawPanel = new WithdrawPanel();
-    FundTransferPanel fundTransferPanel = new FundTransferPanel();
-    ProfilePanel profilePanel = new ProfilePanel();
 
     public JFrame frame = new JFrame("Bank");
     JPanel sidepanel = new JPanel();
 
-    public HomePage(){
+    public HomePage(UserDetails userDetails){
+        DepositPanel depositPanel = new DepositPanel();
+        WithdrawPanel withdrawPanel = new WithdrawPanel();
+        FundTransferPanel fundTransferPanel = new FundTransferPanel();
+        ProfilePanel profilePanel = new ProfilePanel(userDetails);
+        this.userDetails = userDetails;
         layout = new MigLayout("insets 0, fill,wrap");
         frame.setLayout(layout);
         frame.setSize(1100,700);
