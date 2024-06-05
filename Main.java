@@ -3,8 +3,10 @@ import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
 import services.Database;
 import services.Login;
+import services.Profile;
 import services.Register;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,12 +46,22 @@ public class Main {
     }
 
     public static void setHomepage(){
+        Profile profile = new Profile();
         homepage = new HomePage(userDetails);
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 homepage.frame.dispose();
                 Loginpage();
+            }
+        });
+
+        homepage.setAddresssButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(profile.validateAddresss()){
+
+                }
             }
         });
     }

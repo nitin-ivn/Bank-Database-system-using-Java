@@ -19,6 +19,7 @@ public class HomePage {
     ImageIcon imageIcon;
     JLabel bankimage;
     MigLayout layout;
+    ProfilePanel profilePanel;
 
     ButtonOutline AccountDetails = new ButtonOutline("Account Details",1);
     ButtonOutline Depositbutton = new ButtonOutline("Deposit",1);
@@ -36,7 +37,7 @@ public class HomePage {
         DepositPanel depositPanel = new DepositPanel();
         WithdrawPanel withdrawPanel = new WithdrawPanel();
         FundTransferPanel fundTransferPanel = new FundTransferPanel();
-        ProfilePanel profilePanel = new ProfilePanel(userDetails);
+        profilePanel = new ProfilePanel(userDetails);
         this.userDetails = userDetails;
         layout = new MigLayout("insets 0, fill,wrap");
         frame.setLayout(layout);
@@ -158,5 +159,25 @@ public class HomePage {
 
     public void LogoutButtonActionPerformed(ActionListener listener){
         LogoutButton.addActionListener(listener);
+    }
+
+    public ProfilePanel getProfilePanel(){
+        return profilePanel.getProfilePanel();
+    }
+
+    public void setAddresssButtonActionListener(ActionListener listener){
+        profilePanel.getAddressButton().addActionListener(listener);
+    }
+
+    public void setUpdateDetailsActionListener(ActionListener listener){
+        profilePanel.getUpdateDetailsButton().addActionListener(listener);
+    }
+
+    public void setUpdatePasswordActionListener(ActionListener listener){
+        profilePanel.getUpdatePasswordButton().addActionListener(listener);
+    }
+
+    public void setpinActionListener(ActionListener listener){
+        profilePanel.getpinButton().addActionListener(listener);
     }
 }

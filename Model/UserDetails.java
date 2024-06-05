@@ -8,7 +8,8 @@ public class UserDetails {
     public String LastName;
     public long PhoneNo;
     public String Email;
-    public Address addressofUser;
+    public Address address;
     public Date DOB;
     public int Balance;
+    public int Pin;
 }

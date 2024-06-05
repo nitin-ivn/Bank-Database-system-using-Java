@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Database {
+    static String Url = "jdbc:mysql://127.0.0.1:3306/Bank";
+    static String Username = "root";
+    static String Password = "database";
     final String url = "jdbc:mysql://127.0.0.1:3306/Bank";
     final String username = "root";
     final String password = "database";
@@ -103,10 +106,7 @@ public class Database {
 
     public static UserDetails setUserDetails(long Accountnum){
         try {
-            String url = "jdbc:mysql://127.0.0.1:3306/Bank";
-            String username = "root";
-            String password = "database";
-            Connection connection1 = DriverManager.getConnection(url,username,password);
+            Connection connection1 = DriverManager.getConnection(Url,Username,Password);
             String query = "SELECT * FROM User_Details WHERE Account_Number = ?";
             PreparedStatement statement = connection1.prepareStatement(query);
             statement.setLong(1,Accountnum);
@@ -124,5 +124,9 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return userDetails;
+    }
+
+    public static void InsertAddressDetails(){
+
     }
 }

@@ -2,13 +2,9 @@ package Views.Componenets;
 
 import Model.UserDetails;
 import net.miginfocom.swing.MigLayout;
-import services.Database;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ProfilePanel extends JPanel{
         UserDetails userDetails;
@@ -142,4 +138,23 @@ public class ProfilePanel extends JPanel{
         add(DeleteAccount,"width 100,height 30,pos 580 585");
     }
 
+    public ProfilePanel getProfilePanel(){
+        return ProfilePanel.this;
+    }
+
+    public JButton getAddressButton(){
+        return setAddress;
+    }
+
+    public JButton getUpdateDetailsButton(){
+        return UpdateDetails;
+    }
+
+    public JButton getUpdatePasswordButton(){
+        return UpdatePassword;
+    }
+
+    public JButton getpinButton(){
+        return Setpin;
+    }
 }
