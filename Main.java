@@ -9,13 +9,14 @@ import services.Register;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Main {
     static LoginAndRegisterPage loginAndRegisterPage;
     static HomePage homepage;
     static UserDetails userDetails;
     public static void main(String[] args) {
-        Loginpage();
+        setHomepage();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
@@ -46,6 +47,7 @@ public class Main {
     }
 
     public static void setHomepage(){
+        Database.setpin();
         homepage = new HomePage(userDetails);
         Profile profile = new Profile(homepage.getProfilePanel());
         homepage.LogoutButtonActionPerformed(new ActionListener() {
@@ -55,14 +57,26 @@ public class Main {
                 Loginpage();
             }
         });
-
         homepage.setAddresssButtonActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(profile.validateAddresss()){
-                    JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address set succesfully");
+                    Database.setpin();
+                    userDetails = Database.GetUserDetails();
+                    if(userDetails.Pin == 0) {
+                        int pin = random();
+                        Database.SetUserPin(pin);
+                        JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Address is Set Successfully and your PIN is "+pin);
+                    }else{
+                        JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address is Updated Successfully and dumb your pin is "+userDetails.Pin);
+                    }
                 }
             }
         });
+    }
+
+    private static int random(){
+        Random rand = new Random();
+        return (rand.nextInt(9000)+1000);
     }
 }

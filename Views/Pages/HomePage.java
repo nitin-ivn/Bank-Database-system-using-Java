@@ -28,7 +28,6 @@ public class HomePage {
     ButtonOutline ProfileButton = new ButtonOutline("Profile",0);
     ButtonOutline LogoutButton = new ButtonOutline("Log Out", 0);
 
-    AccountDetailsPanel accountspanel = new AccountDetailsPanel();
 
     public JFrame frame = new JFrame("Bank");
     JPanel sidepanel = new JPanel();
@@ -37,6 +36,7 @@ public class HomePage {
         DepositPanel depositPanel = new DepositPanel();
         WithdrawPanel withdrawPanel = new WithdrawPanel();
         FundTransferPanel fundTransferPanel = new FundTransferPanel();
+        AccountDetailsPanel accountspanel = new AccountDetailsPanel(userDetails);
         profilePanel = new ProfilePanel(userDetails);
         this.userDetails = userDetails;
         layout = new MigLayout("insets 0, fill,wrap");
@@ -149,11 +149,17 @@ public class HomePage {
         sidepanel.add(LogoutButton,"width 110, height 40,pos 190 600");
 
         frame.add(sidepanel,"width 30%, pos 0al 0 n 100%");
-        frame.add(profilePanel,"width 70%, pos 1al 0 n 100%");
         frame.add(accountspanel,"width 70%, pos 1al 0 n 100%");
+        frame.add(profilePanel,"width 70%, pos 1al 0 n 100%");
         frame.add(depositPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(withdrawPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(fundTransferPanel,"width 70%, pos 1al 0 n 100%");
+
+        accountspanel.setVisible(true);
+        profilePanel.setVisible(false);
+        depositPanel.setVisible(false);
+        withdrawPanel.setVisible(false);
+        fundTransferPanel.setVisible(false);
         frame.setVisible(true);
     }
 

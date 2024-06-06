@@ -7,6 +7,7 @@ import Model.UserDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Database {
     static String Url = "jdbc:mysql://127.0.0.1:3306/Bank";
@@ -143,7 +144,31 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-    public static void SetUserPin(){
+    public static void SetUserPin(int ran){
+        try {
+            Connection connection1 = DriverManager.getConnection(Url, Username, Password);
+            String query = "UPDATE User_Details SET PIN = ? WHERE Account_Number = ?";
+            PreparedStatement statement = connection1.prepareStatement(query);
+            statement.setInt(1,ran);
+            statement.setLong(2,userDetails.AccountNumber);
+            int n =  statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
+    public static void setpin(){
+        try {
+            Connection connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "SELECT (PIN) FROM User_Details WHERE Account_Number = ?";
+            PreparedStatement statement = connection1.prepareStatement(query);
+            statement.setLong(1,userDetails.AccountNumber);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                userDetails.Pin = resultSet.getInt("PIN");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
