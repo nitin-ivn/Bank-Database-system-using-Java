@@ -1,6 +1,7 @@
 package services;
 
 
+import Model.Address;
 import Model.RegisterDetails;
 import Model.UserDetails;
 
@@ -126,7 +127,23 @@ public class Database {
         return userDetails;
     }
 
-    public static void InsertAddressDetails(){
+    public void InsertAddressDetails(Address address) {
+        try {
+            String query = "UPDATE Address SET House_Number=?,Colony=?,City=?,State=?,Pincode=?,Country = 'India' WHERE Account_Number = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,address.HouseNo);
+            statement.setString(2,address.Colony);
+            statement.setString(3,address.City);
+            statement.setString(4,address.State);
+            statement.setInt(5,address.Pincode);
+            statement.setLong(6,userDetails.AccountNumber);
+            int n = statement.executeUpdate();
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void SetUserPin(){
 
     }
 }

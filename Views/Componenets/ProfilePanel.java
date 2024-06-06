@@ -22,24 +22,24 @@ public class ProfilePanel extends JPanel{
     Color bgcolor = new Color(71,75,75);
     JLabel title = new JLabel("Profile");
     JLabel addresslabel = new JLabel("Address");
-    MyTextField Houseno = new MyTextField();
-    MyTextField Colony = new MyTextField();
-    MyTextField City = new MyTextField();
-    MyComboBox state = new MyComboBox(statesAndUTs);
-    MyTextField pincode = new MyTextField();
-    MyTextField country = new MyTextField();
+    public MyTextField Houseno = new MyTextField();
+    public MyTextField Colony = new MyTextField();
+    public MyTextField City = new MyTextField();
+    public MyComboBox state = new MyComboBox(statesAndUTs);
+    public MyTextField pincode = new MyTextField();
+    public MyTextField country = new MyTextField();
     MyButton setAddress = new MyButton("Update Address");
 
     JLabel user = new JLabel("User Details");
-    MyTextField firstname = new MyTextField();
-    MyTextField lastname = new MyTextField();
-    MyTextField phoneno = new MyTextField();
-    MyTextField email = new MyTextField();
+    public MyTextField firstname = new MyTextField();
+    public MyTextField lastname = new MyTextField();
+    public MyTextField phoneno = new MyTextField();
+    public MyTextField email = new MyTextField();
     MyButton UpdateDetails = new MyButton("Update");
 
     JLabel pass = new JLabel("Password");
-    MyPasswordField passwordField = new MyPasswordField();
-    MyPasswordField confirmpasswordField = new MyPasswordField();
+    public MyPasswordField passwordField = new MyPasswordField();
+    public MyPasswordField confirmpasswordField = new MyPasswordField();
     MyButton UpdatePassword = new MyButton("Update");
 
     JLabel resetpin = new JLabel("Reset Pin");

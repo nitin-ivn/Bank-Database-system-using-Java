@@ -15,7 +15,7 @@ public class Main {
     static HomePage homepage;
     static UserDetails userDetails;
     public static void main(String[] args) {
-        setHomepage();
+        Loginpage();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
@@ -46,8 +46,8 @@ public class Main {
     }
 
     public static void setHomepage(){
-        Profile profile = new Profile();
         homepage = new HomePage(userDetails);
+        Profile profile = new Profile(homepage.getProfilePanel());
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,7 +60,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(profile.validateAddresss()){
-
+                    JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address set succesfully");
                 }
             }
         });
