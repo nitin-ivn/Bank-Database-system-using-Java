@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Withdraw {
+    public int Account_Number;
     public int Balance;
     public int Amount;
     public Date DateOfDeposit;

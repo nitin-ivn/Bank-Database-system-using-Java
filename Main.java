@@ -1,10 +1,8 @@
 import Model.UserDetails;
+import Views.Componenets.WithdrawPanel;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
-import services.Database;
-import services.Login;
-import services.Profile;
-import services.Register;
+import services.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,9 +45,12 @@ public class Main {
     }
 
     public static void setHomepage(){
+        Database.setBalance();
         Database.setpin();
         homepage = new HomePage(userDetails);
         Profile profile = new Profile(homepage.getProfilePanel());
+        DepositService depositService = new DepositService(homepage.getDepositPanel(),userDetails);
+        WithdrawService withdrawService = new WithdrawService(homepage.getWithdrawPanel(),userDetails);
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,6 +71,35 @@ public class Main {
                     }else{
                         JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address is Updated Successfully and dumb your pin is "+userDetails.Pin);
                     }
+                }
+            }
+        });
+
+        homepage.setCheckBalanceButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(homepage.getAccountspanel(),"Your Account Balance is "+userDetails.Balance);
+            }
+        });
+
+        homepage.setDepositbuttonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(depositService.validateDeposit()){
+                    Database.UpdateBalance(userDetails.Balance + depositService.AddBalance());
+                    Database.setBalance();
+                    JOptionPane.showMessageDialog(homepage.getDepositPanel(),"Amount Deposited Successfully");
+                }
+            }
+        });
+
+        homepage.setWithdrawButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(withdrawService.validateWithdraw()) {
+                    Database.UpdateBalance(userDetails.Balance - withdrawService.SubtractBalance());
+                    Database.setBalance();
+                    JOptionPane.showMessageDialog(homepage.getWithdrawPanel(), "Amount Withdrawn Successfully");
                 }
             }
         });

@@ -107,4 +107,12 @@ public class AccountDetailsPanel extends JPanel {
         int lineHeight = 2; // Adjust the height of the line as needed
         g.fillRect(lineX, lineY, lineWidth, lineHeight);
     }
+
+    public JButton getCheckBalanceButton(){
+        return CheckBalanceButton;
+    }
+
+    public AccountDetailsPanel getAccountsPanel(){
+        return AccountDetailsPanel.this;
+    }
 }
