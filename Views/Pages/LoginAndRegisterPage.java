@@ -22,7 +22,7 @@ public class LoginAndRegisterPage {
     public JFrame frame = new JFrame("Bank");
     private final int coversize = 50;
     private final int loginsize = 50;
-    private final int addsize = 30;
+    private final int addsize = 40;
     private final DecimalFormat df = new DecimalFormat("##0.###");
 
 

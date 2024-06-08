@@ -39,7 +39,7 @@ public class WithdrawPanel extends JPanel {
         Amount.setFont(new Font("sansserif", Font.PLAIN, 20));
         add(Amount,"pos 210 125");
 
-        AmountText.setHint("");
+        AmountText.setHint("Up to 6 Digits");
         add(AmountText,"width 250,pos 290 120");
         AmountText.addKeyListener(new KeyAdapter() {
             @Override
@@ -50,23 +50,7 @@ public class WithdrawPanel extends JPanel {
                 }
             }
         });
-        PlainDocument doc = (PlainDocument) AmountText.getDocument();
-        doc.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (fb.getDocument().getLength() + string.length() <= 6 && string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-
-            @Override
-            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (fb.getDocument().getLength() + text.length() - length <= 6 && text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
-
+        setLimit(AmountText,6);
         amountlabel.setFont(labelfont);
         amountlabel.setForeground(Color.RED);
         add(amountlabel,"pos 290 160");
@@ -75,7 +59,7 @@ public class WithdrawPanel extends JPanel {
         Pin.setFont(new Font("sansserif", Font.PLAIN, 20));
         add(Pin,"pos 230 185");
 
-        PinText.setHint("");
+        PinText.setHint("4 Digit Pin");
         add(PinText,"width 250,pos 290 180");
         PinText.addKeyListener(new KeyAdapter() {
             @Override
@@ -86,22 +70,7 @@ public class WithdrawPanel extends JPanel {
                 }
             }
         });
-        PlainDocument doc1 = (PlainDocument) PinText.getDocument();
-        doc1.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (fb.getDocument().getLength() + string.length() <= 4 && string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-
-            @Override
-            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (fb.getDocument().getLength() + text.length() - length <= 4 && text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
+        setLimit(PinText,4);
 
         pinlabel.setFont(labelfont);
         pinlabel.setForeground(Color.RED);
@@ -127,5 +96,24 @@ public class WithdrawPanel extends JPanel {
 
     public WithdrawPanel getWithdrawPanel(){
         return WithdrawPanel.this;
+    }
+
+    private void setLimit(JTextField field,int limit){
+        PlainDocument doc1 = (PlainDocument) field.getDocument();
+        doc1.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (fb.getDocument().getLength() + string.length() <= limit && string.matches("\\d+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (fb.getDocument().getLength() + text.length() - length <= limit && text.matches("\\d+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
     }
 }

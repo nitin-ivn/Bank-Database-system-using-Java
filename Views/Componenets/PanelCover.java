@@ -25,11 +25,8 @@ public class PanelCover extends JPanel{
         layout = new MigLayout("insets 0,wrap,fill");
         setLayout(layout);
         Signinbutton = new ButtonOutline("Sign In",0);
-        Signinbutton.addActionListener(this::jbuttonActionPerfored);
+        Signinbutton.addActionListener(this::jbuttonActionPerformed);
         Signinbutton.setFont(new Font("sansserif",Font.BOLD,18));
-        Signinbutton.setColor(new Color(71,75,75));
-        Signinbutton.setColorOver(Color.WHITE);
-        Signinbutton.setBorderColor(Color.WHITE);
         Signinbutton.setBackground(new Color(71,75,75));
         Signinbutton.setForeground(Color.WHITE);
         add(Signinbutton,"width 200, height 45 ,pos 50 430");
@@ -61,7 +58,7 @@ public class PanelCover extends JPanel{
 
     }
 
-    private void jbuttonActionPerfored(ActionEvent evt){
+    private void jbuttonActionPerformed(ActionEvent evt){
         event.actionPerformed(evt);
     }
 

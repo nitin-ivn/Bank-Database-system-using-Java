@@ -1,7 +1,5 @@
 package Views.Componenets;
 
-import services.Login;
-import services.Register;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -9,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class PanelLogin extends JLayeredPane {
-
 
     JPanel login = new JPanel();
     JPanel register = new JPanel();

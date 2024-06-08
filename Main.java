@@ -1,4 +1,5 @@
 import Model.UserDetails;
+import Views.Componenets.FundTransferPanel;
 import Views.Componenets.WithdrawPanel;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
@@ -51,6 +52,7 @@ public class Main {
         Profile profile = new Profile(homepage.getProfilePanel());
         DepositService depositService = new DepositService(homepage.getDepositPanel(),userDetails);
         WithdrawService withdrawService = new WithdrawService(homepage.getWithdrawPanel(),userDetails);
+        FundTransferService fundTransferService =new FundTransferService(homepage.getFundTransferPanel(),userDetails);
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,6 +102,15 @@ public class Main {
                     Database.UpdateBalance(userDetails.Balance - withdrawService.SubtractBalance());
                     Database.setBalance();
                     JOptionPane.showMessageDialog(homepage.getWithdrawPanel(), "Amount Withdrawn Successfully");
+                }
+            }
+        });
+
+        homepage.setFundTransferButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(fundTransferService.validateFundTransfer()){
+                    JOptionPane.showMessageDialog(homepage.getFundTransferPanel(),"Payment is completed successfully");
                 }
             }
         });

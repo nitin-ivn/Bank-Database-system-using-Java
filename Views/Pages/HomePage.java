@@ -22,6 +22,7 @@ public class HomePage {
     DepositPanel depositPanel;
     WithdrawPanel withdrawPanel;
     AccountDetailsPanel accountspanel;
+    FundTransferPanel fundTransferPanel;
 
     ButtonOutline AccountDetails = new ButtonOutline("Account Details",1);
     ButtonOutline Depositbutton = new ButtonOutline("Deposit",1);
@@ -37,7 +38,7 @@ public class HomePage {
     public HomePage(UserDetails userDetails){
         depositPanel = new DepositPanel();
         withdrawPanel = new WithdrawPanel();
-        FundTransferPanel fundTransferPanel = new FundTransferPanel();
+        fundTransferPanel = new FundTransferPanel();
         accountspanel = new AccountDetailsPanel(userDetails);
         profilePanel = new ProfilePanel(userDetails);
         this.userDetails = userDetails;
@@ -198,6 +199,10 @@ public class HomePage {
             withdrawPanel.getWithdrawButton().addActionListener(listener);
     }
 
+    public void setFundTransferButtonActionListener(ActionListener listener){
+            fundTransferPanel.getTransferFundsButton().addActionListener(listener);
+    }
+
     public ProfilePanel getProfilePanel(){
         return profilePanel.getProfilePanel();
     }
@@ -212,5 +217,9 @@ public class HomePage {
 
     public  WithdrawPanel getWithdrawPanel(){
         return withdrawPanel.getWithdrawPanel();
+    }
+
+    public FundTransferPanel getFundTransferPanel(){
+        return fundTransferPanel.getfundtransferpanel();
     }
 }
