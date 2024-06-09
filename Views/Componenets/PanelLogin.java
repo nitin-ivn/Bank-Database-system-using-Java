@@ -38,7 +38,7 @@ public class PanelLogin extends JLayeredPane {
     MyButton LoginButton = new MyButton("Login");
     public MyTextField LAccountNumber = new MyTextField();
     public MyPasswordField Lpassword = new MyPasswordField();
-    public JLabel forgotpassord = new JLabel("Forgot Your Passoword?");
+    public JLabel forgotpassord = new JLabel("Forgot Your Password?");
 
 
     public PanelLogin(){
@@ -47,8 +47,8 @@ public class PanelLogin extends JLayeredPane {
         add(register,"card2");
         initRegister();
         initLogin();
-        login.setVisible(false);
-        register.setVisible(true);
+        login.setVisible(true);
+        register.setVisible(false);
 
     }
 
@@ -56,10 +56,10 @@ public class PanelLogin extends JLayeredPane {
         register.setBackground(Color.WHITE);
         register.setLayout(new MigLayout("wrap","",""));
 
-        JLabel createAccount = new JLabel("Create Account");
+        LineBottomLabel createAccount = new LineBottomLabel("Create Account",new Color(71,75,75));
         createAccount.setFont(new Font("sansserif",Font.BOLD,35));
         createAccount.setForeground(new Color(71,75,75));
-        register.add(createAccount,"pos 50 50");
+        register.add(createAccount,"pos 125 30");
 
 
         FirstName.setHint("First Name");
@@ -181,17 +181,16 @@ public class PanelLogin extends JLayeredPane {
 
         Registerbutton.setFont(new Font("sansserif",Font.BOLD,18));
         register.add(Registerbutton,"width 200, height 50px, pos 50 510");
-
     }
 
     private void initLogin(){
         login.setBackground(Color.WHITE);
         login.setLayout(new MigLayout("wrap","",""));
 
-        JLabel LoginAccount = new JLabel("Login");
+        LineBottomLabel LoginAccount = new LineBottomLabel("Login",new Color(71,75,75));
         LoginAccount.setFont(new Font("sansserif", Font.BOLD,35));
         LoginAccount.setForeground(new Color(71,75,75));
-        login.add(LoginAccount,"pos 50 160");
+        login.add(LoginAccount,"pos 195 155");
 
         LAccountNumber.setHint("Account Number");
         LAccountNumber.addKeyListener(new KeyAdapter() {
@@ -243,11 +242,11 @@ public class PanelLogin extends JLayeredPane {
 
     public void ShowRegister(boolean show){
         if(show){
-            login.setVisible(false);
-            register.setVisible(true);
-        }else{
             login.setVisible(true);
             register.setVisible(false);
+        }else{
+            login.setVisible(false);
+            register.setVisible(true);
         }
     }
     public JButton getLoginButton(){
@@ -261,6 +260,5 @@ public class PanelLogin extends JLayeredPane {
     public PanelLogin getloginpanel(){
         return PanelLogin.this;
     }
-
 
 }

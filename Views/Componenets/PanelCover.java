@@ -18,14 +18,13 @@ public class PanelCover extends JPanel{
     private JLabel description;
     private JLabel description1;
     ButtonOutline Signinbutton;
-    private boolean isLogin;
     MigLayout layout;
 
     public PanelCover(){
         layout = new MigLayout("insets 0,wrap,fill");
         setLayout(layout);
         setOpaque(false);
-        Signinbutton = new ButtonOutline("Sign In",0);
+        Signinbutton = new ButtonOutline("Sign Up",0);
         Signinbutton.addActionListener(this::jbuttonActionPerformed);
         Signinbutton.setFont(new Font("sansserif",Font.BOLD,18));
         Signinbutton.setBackground(new Color(71,75,75));
@@ -38,12 +37,12 @@ public class PanelCover extends JPanel{
         title.setForeground(new Color(245,245,245));
         add(title,"pos 50 280");
 
-        description = new JLabel("<html>To create a online account u must have a offline account first<br> with known account number.</html>");
+        description = new JLabel("<html>Welcome Back! Please enter your Account Number<br> and Password to Proceed</html>");
         description.setForeground(new Color(245,245,245));
         description.setFont(new Font("sansserif",Font.BOLD,14));
         add(description,"pos 50 330");
 
-        description1 = new JLabel("Already Have a Account?");
+        description1 = new JLabel("Not Registered?");
         description1.setForeground(new Color(245,245,245));
         description1.setFont(new Font("sansserif",Font.BOLD,14));
         add(description1,"pos 50 400");
@@ -109,13 +108,13 @@ public class PanelCover extends JPanel{
 
     private void login(boolean login){
         if(!login){
-            description.setText("<html>To create a online account u must have a offline account first<br> with known account number.</html>");
-            description1.setText("Already Have a Account?");
-            Signinbutton.setText("Sign In");
-        }else{
             description.setText("<html>Welcome Back! Please enter your Account Number<br> and Password to Proceed</html>");
             description1.setText("Not Registered?");
             Signinbutton.setText("Sign Up");
+        }else{
+            description.setText("<html>To create a online account u must have a offline account first<br> with known account number.</html>");
+            description1.setText("Already Have a Account?");
+            Signinbutton.setText("Sign In");
         }
     }
 }

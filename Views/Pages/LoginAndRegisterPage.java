@@ -63,7 +63,7 @@ public class LoginAndRegisterPage {
                         cover.loginLeft((1f - fraction)*100);
                     }
                 }
-                if(fraction >= 0.5f){
+                if(fraction >= 0.52009f){
                     loginRegister.ShowRegister(isLogin);
                 }
                 fractionCover=Double.parseDouble(df.format(fractionCover));

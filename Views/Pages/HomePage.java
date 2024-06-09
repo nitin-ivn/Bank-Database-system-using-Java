@@ -20,13 +20,13 @@ public class HomePage {
     MigLayout layout;
     ProfilePanel profilePanel;
     DepositPanel depositPanel;
-    WithdrawPanel withdrawPanel;
+    LoansPanel loansPanel;
     AccountDetailsPanel accountspanel;
     FundTransferPanel fundTransferPanel;
 
     ButtonOutline AccountDetails = new ButtonOutline("Account Details",1);
     ButtonOutline Depositbutton = new ButtonOutline("Deposit",1);
-    ButtonOutline Withdrawbutton = new ButtonOutline("Withdraw",1);
+    ButtonOutline Loansbutton = new ButtonOutline("Loans",1);
     ButtonOutline FundTransferButton = new ButtonOutline("Fund Transfer", 1);
     ButtonOutline ProfileButton = new ButtonOutline("Profile",0);
     ButtonOutline LogoutButton = new ButtonOutline("Log Out", 0);
@@ -37,7 +37,7 @@ public class HomePage {
 
     public HomePage(UserDetails userDetails){
         depositPanel = new DepositPanel();
-        withdrawPanel = new WithdrawPanel();
+        loansPanel = new LoansPanel();
         fundTransferPanel = new FundTransferPanel();
         accountspanel = new AccountDetailsPanel(userDetails);
         profilePanel = new ProfilePanel(userDetails);
@@ -71,7 +71,7 @@ public class HomePage {
             public void mouseClicked(MouseEvent e) {
                 accountspanel.setVisible(true);
                 depositPanel.setVisible(false);
-                withdrawPanel.setVisible(false);
+                loansPanel.setVisible(false);
                 fundTransferPanel.setVisible(false);
                 profilePanel.setVisible(false);
             }
@@ -86,22 +86,22 @@ public class HomePage {
             public void mouseClicked(MouseEvent e) {
                 accountspanel.setVisible(false);
                 depositPanel.setVisible(true);
-                withdrawPanel.setVisible(false);
+                loansPanel.setVisible(false);
                 fundTransferPanel.setVisible(false);
                 profilePanel.setVisible(false);
             }
         });
 
-        Withdrawbutton.setBackground(new Color(64,67,67));
-        Withdrawbutton.setForeground(Color.WHITE);
-        Withdrawbutton.setFont(new Font("",Font.BOLD,16));
-        Withdrawbutton.setBorder(new EmptyBorder(5,5,5,5));
-        Withdrawbutton.addMouseListener(new MouseAdapter() {
+        Loansbutton.setBackground(new Color(64,67,67));
+        Loansbutton.setForeground(Color.WHITE);
+        Loansbutton.setFont(new Font("",Font.BOLD,16));
+        Loansbutton.setBorder(new EmptyBorder(5,5,5,5));
+        Loansbutton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 accountspanel.setVisible(false);
                 depositPanel.setVisible(false);
-                withdrawPanel.setVisible(true);
+                loansPanel.setVisible(true);
                 fundTransferPanel.setVisible(false);
                 profilePanel.setVisible(false);
             }
@@ -116,7 +116,7 @@ public class HomePage {
             public void mouseClicked(MouseEvent e) {
                 accountspanel.setVisible(false);
                 depositPanel.setVisible(false);
-                withdrawPanel.setVisible(false);
+                loansPanel.setVisible(false);
                 fundTransferPanel.setVisible(true);
                 profilePanel.setVisible(false);
             }
@@ -130,7 +130,7 @@ public class HomePage {
             public void mouseClicked(MouseEvent e) {
                 accountspanel.setVisible(false);
                 depositPanel.setVisible(false);
-                withdrawPanel.setVisible(false);
+                loansPanel.setVisible(false);
                 fundTransferPanel.setVisible(false);
                 profilePanel.setVisible(true);
             }
@@ -143,7 +143,7 @@ public class HomePage {
         sidepanel.setLayout(new MigLayout("insets 0"));
         sidepanel.add(AccountDetails,"width 100%,height 60,pos 0 270");
         sidepanel.add(Depositbutton,"width 100%,height 60,pos 0 325");
-        sidepanel.add(Withdrawbutton,"width 100%,height 60,pos 0 380");
+        sidepanel.add(Loansbutton,"width 100%,height 60,pos 0 380");
         sidepanel.add(FundTransferButton,"width 100%,height 60,pos 0 435");
         sidepanel.setBackground(bgcolor);
         sidepanel.add(bankimage,"pos 68 10");
@@ -155,13 +155,13 @@ public class HomePage {
         frame.add(depositPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(accountspanel,"width 70%, pos 1al 0 n 100%");
         frame.add(profilePanel,"width 70%, pos 1al 0 n 100%");
-        frame.add(withdrawPanel,"width 70%, pos 1al 0 n 100%");
+        frame.add(loansPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(fundTransferPanel,"width 70%, pos 1al 0 n 100%");
 
         accountspanel.setVisible(false);
         profilePanel.setVisible(false);
         depositPanel.setVisible(true);
-        withdrawPanel.setVisible(false);
+        loansPanel.setVisible(false);
         fundTransferPanel.setVisible(false);
         frame.setVisible(true);
     }
@@ -195,9 +195,6 @@ public class HomePage {
             accountspanel.getCheckBalanceButton().addActionListener(listener);
     }
 
-    public void setWithdrawButtonActionListener(ActionListener listener){
-            withdrawPanel.getWithdrawButton().addActionListener(listener);
-    }
 
     public void setFundTransferButtonActionListener(ActionListener listener){
             fundTransferPanel.getTransferFundsButton().addActionListener(listener);
@@ -215,9 +212,6 @@ public class HomePage {
         return accountspanel.getAccountsPanel();
     }
 
-    public  WithdrawPanel getWithdrawPanel(){
-        return withdrawPanel.getWithdrawPanel();
-    }
 
     public FundTransferPanel getFundTransferPanel(){
         return fundTransferPanel.getfundtransferpanel();
