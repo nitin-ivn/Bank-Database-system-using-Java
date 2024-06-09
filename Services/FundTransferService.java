@@ -5,7 +5,6 @@ import Views.Componenets.FundTransferPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FundTransferService {
     UserDetails userDetails;
@@ -77,5 +76,13 @@ public class FundTransferService {
             JOptionPane.showMessageDialog(fundTransferPanel,"Pin is either wrong or not set. (You can set it in profile by giving address details)");
         }
         return false;
+    }
+
+    public long getAccNum(){
+        return Long.parseLong(fundTransferPanel.AccountNumberText.getText());
+    }
+
+    public int getAmount(){
+        return Integer.parseInt(fundTransferPanel.AmountText.getText());
     }
 }

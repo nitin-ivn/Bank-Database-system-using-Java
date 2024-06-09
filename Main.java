@@ -88,7 +88,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(depositService.validateDeposit()){
-                    Database.UpdateBalance(userDetails.Balance + depositService.AddBalance());
+                    Database.UpdateBalance(userDetails.Balance + depositService.AddBalance(),userDetails.AccountNumber);
                     Database.setBalance();
                     JOptionPane.showMessageDialog(homepage.getDepositPanel(),"Amount Deposited Successfully");
                 }
@@ -99,7 +99,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(withdrawService.validateWithdraw()) {
-                    Database.UpdateBalance(userDetails.Balance - withdrawService.SubtractBalance());
+                    Database.UpdateBalance(userDetails.Balance - withdrawService.SubtractBalance(),userDetails.AccountNumber);
                     Database.setBalance();
                     JOptionPane.showMessageDialog(homepage.getWithdrawPanel(), "Amount Withdrawn Successfully");
                 }
@@ -110,7 +110,9 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(fundTransferService.validateFundTransfer()){
-                    JOptionPane.showMessageDialog(homepage.getFundTransferPanel(),"Payment is completed successfully");
+                    int bal = Database.getReceiverBalance(fundTransferService.getAccNum());
+                    Database.UpdateBalance(bal + fundTransferService.getAmount(),fundTransferService.getAccNum());
+                    JOptionPane.showMessageDialog(homepage.getFundTransferPanel(),"Amount Transferred Successfully");
                 }
             }
         });

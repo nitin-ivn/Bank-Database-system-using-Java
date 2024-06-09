@@ -219,7 +219,7 @@ public class Database {
         }
     }
 
-    public static void UpdateBalance ( int balance){
+    public static void UpdateBalance (int balance,Long AccountNumber){
         Connection connection1 = null;
         PreparedStatement statement = null;
         try {
@@ -227,7 +227,7 @@ public class Database {
             String query = "UPDATE User_Details SET User_Balance = ? WHERE Account_Number = ?";
             statement = connection1.prepareStatement(query);
             statement.setInt(1,balance);
-            statement.setLong(2,userDetails.AccountNumber);
+            statement.setLong(2,AccountNumber);
             int n = statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -278,4 +278,37 @@ public class Database {
     }
 
 
+    public static int getReceiverBalance(Long AccountNum) {
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int bal = 0;
+        try {
+            connection1 = DriverManager.getConnection(Url, Username, Password);
+            String query = "SELECT (User_Balance) FROM User_Details WHERE Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setLong(1, AccountNum);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                bal = resultSet.getInt("User_Balance");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return bal;
+    }
 }

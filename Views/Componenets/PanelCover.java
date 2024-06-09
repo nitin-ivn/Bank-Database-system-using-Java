@@ -24,6 +24,7 @@ public class PanelCover extends JPanel{
     public PanelCover(){
         layout = new MigLayout("insets 0,wrap,fill");
         setLayout(layout);
+        setOpaque(false);
         Signinbutton = new ButtonOutline("Sign In",0);
         Signinbutton.addActionListener(this::jbuttonActionPerformed);
         Signinbutton.setFont(new Font("sansserif",Font.BOLD,18));

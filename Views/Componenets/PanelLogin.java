@@ -203,7 +203,7 @@ public class PanelLogin extends JLayeredPane {
                 }
             }
         });
-        login.add(LAccountNumber,"width 400px, pos 50 220");
+        login.add(LAccountNumber,"width 400, pos 50 220");
 
         LabelAccno.setForeground(Color.RED);
         LabelAccno.setFont(labelfont);
@@ -243,11 +243,11 @@ public class PanelLogin extends JLayeredPane {
 
     public void ShowRegister(boolean show){
         if(show){
-            register.setVisible(true);
             login.setVisible(false);
+            register.setVisible(true);
         }else{
-            register.setVisible(false);
             login.setVisible(true);
+            register.setVisible(false);
         }
     }
     public JButton getLoginButton(){
