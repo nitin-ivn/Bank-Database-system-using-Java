@@ -8,6 +8,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -26,6 +28,9 @@ public class DepositPanel extends JPanel {
     public MyTextField PinText = new MyTextField();
 
     MyButton DepositButton = new MyButton("Deposit");
+    MyButton Next = new MyButton("Next");
+
+    public JPanel qrpanel = new JPanel();
 
     public DepositPanel(){
         setBackground(Color.WHITE);
@@ -33,14 +38,14 @@ public class DepositPanel extends JPanel {
 
         title.setForeground(bgcolor);
         title.setFont(new Font("sansserif",Font.BOLD,36));
-        add(title,"pos 300 40");
+        add(title,"pos 120 40");
 
         Amount.setForeground(new Color(102, 108, 108));
         Amount.setFont(new Font("sansserif", Font.PLAIN, 20));
-        add(Amount,"pos 210 125");
+        add(Amount,"pos 30 125");
 
         AmountText.setHint("Up to 6 digits");
-        add(AmountText,"width 250,pos 290 120");
+        add(AmountText,"width 250,pos 115 120");
         AmountText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -54,31 +59,39 @@ public class DepositPanel extends JPanel {
 
         amountlabel.setFont(labelfont);
         amountlabel.setForeground(Color.RED);
-        add(amountlabel,"pos 290 160");
+        add(amountlabel,"pos 115 160");
 
-        Pin.setForeground(new Color(102, 108, 108));
-        Pin.setFont(new Font("sansserif", Font.PLAIN, 20));
-        add(Pin,"pos 230 185");
 
-        PinText.setHint("4 Digit Pin");
-        add(PinText,"width 250,pos 290 180");
-        PinText.addKeyListener(new KeyAdapter() {
+        Next.setFont(new Font("sansserif",Font.BOLD,18));
+        Next.addActionListener(new ActionListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if(!Character.isDigit(c)){
-                    e.consume();
-                }
+            public void actionPerformed(ActionEvent e) {
+                qrpanel.setVisible(true);
             }
         });
-        setLimit(PinText,4);
+        add(Next,"width 100,height 40,pos 450 120");
 
-        pinlabel.setFont(labelfont);
-        pinlabel.setForeground(Color.RED);
-        add(pinlabel,"pos 290 220");
+        qrpanel.setBackground(Color.WHITE);
+        qrpanel.setLayout(new MigLayout("fill"));
+        add(qrpanel,"width 90%,height 50%,pos 10 230");
+
+        ImageIcon imageIcon = new ImageIcon("Icons/Qr.png");
+        Image image = imageIcon.getImage();
+        Image resizedImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel bankimage = new JLabel();
+        bankimage.setPreferredSize(new Dimension(300,300));
+        bankimage.setIcon(resizedIcon);
+        qrpanel.add(bankimage,"pos 100 30");
+
+        JLabel text = new JLabel("*Please Scan This QR in any of your payment apps and complete the payment and Click Deposit");
+        text.setForeground(bgcolor);
+        text.setFont(new Font("sansserif",Font.BOLD,12));
+        qrpanel.add(text,"pos 20 350");
 
         DepositButton.setFont(new Font("sansserif",Font.BOLD,18));
-        add(DepositButton,"width 100,height 40,pos 290 250");
+        qrpanel.add(DepositButton,"width 100,height 40,pos 420 250");
+        qrpanel.setVisible(false);
     }
 
     protected void paintComponent(Graphics g) {

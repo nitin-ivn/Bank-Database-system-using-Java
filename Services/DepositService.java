@@ -17,9 +17,7 @@ public class DepositService {
 
     public boolean validateDeposit(){
         if(validateDetails()) {
-            if(ValidatePin()) {
                 return true;
-            }
         }
         return false;
     }
@@ -30,13 +28,7 @@ public class DepositService {
             depositPanel.amountlabel.setText(msg);
             return false;
         }
-        if(depositPanel.PinText.getText().isEmpty()){
-            depositPanel.amountlabel.setText("");
-            depositPanel.pinlabel.setText(msg);
-            return false;
-        }
         depositPanel.amountlabel.setText("");
-        depositPanel.pinlabel.setText("");
         return true;
     }
 
@@ -44,12 +36,4 @@ public class DepositService {
         return Integer.parseInt(depositPanel.AmountText.getText());
     }
 
-    private boolean ValidatePin(){
-        if(Integer.parseInt(depositPanel.PinText.getText()) == userDetails.Pin){
-            return true;
-        }else{
-            JOptionPane.showMessageDialog(depositPanel,"Pin is either wrong or not set. (You can set it in profile by giving address details)");
-        }
-        return false;
-    }
 }

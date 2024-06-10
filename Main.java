@@ -88,6 +88,7 @@ public class Main {
                     Database.UpdateBalance(userDetails.Balance + depositService.AddBalance(),userDetails.AccountNumber);
                     Database.setBalance();
                     JOptionPane.showMessageDialog(homepage.getDepositPanel(),"Amount Deposited Successfully");
+                    homepage.getDepositPanel().qrpanel.setVisible(false);
                 }
             }
         });
