@@ -19,6 +19,7 @@ public class FundTransferService {
     public boolean validateFundTransfer(){
         if(formfilled()){
             if(validateDetails() && ValidatePin()) {
+//                database.setTransactionDetails();
                 return true;
             }
         }

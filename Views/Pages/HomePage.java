@@ -199,6 +199,9 @@ public class HomePage {
     public void setFundTransferButtonActionListener(ActionListener listener){
             fundTransferPanel.getTransferFundsButton().addActionListener(listener);
     }
+    public void setTransactionHistoryButtonActionListener(ActionListener listener){
+            fundTransferPanel.getTransactionHistoryButton().addActionListener(listener);
+    }
 
     public ProfilePanel getProfilePanel(){
         return profilePanel.getProfilePanel();

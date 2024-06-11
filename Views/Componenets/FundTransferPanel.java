@@ -3,6 +3,7 @@ package Views.Componenets;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
@@ -30,20 +31,23 @@ public class FundTransferPanel extends JPanel{
     public MyTextField PinText = new MyTextField();
 
     MyButton FundTransferButton = new MyButton("Transfer Funds");
+    MyButton TransactionHistory = new MyButton("History");
+
     public FundTransferPanel(){
+
+
         setBackground(Color.WHITE);
         setLayout(new MigLayout("fill"));
-
         title.setForeground(bgcolor);
         title.setFont(new Font("sansserif",Font.BOLD,36));
-        add(title,"pos 270 40");
+        add(title,"pos 270 100");
 
         AccountNumber.setForeground(new Color(102, 108, 108));
         AccountNumber.setFont(new Font("sansserif", Font.PLAIN, 20));
-        add(AccountNumber,"pos 180 125");
+        add(AccountNumber,"pos 180 185");
 
         AccountNumberText.setHint("Of the Receiver");
-        add(AccountNumberText,"width 250,pos 290 120");
+        add(AccountNumberText,"width 250,pos 290 180");
         AccountNumberText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -57,14 +61,14 @@ public class FundTransferPanel extends JPanel{
 
         Accountlabel.setFont(labelfont);
         Accountlabel.setForeground(Color.RED);
-        add(Accountlabel,"pos 290 160");
+        add(Accountlabel,"pos 290 220");
 
         Amount.setForeground(new Color(102, 108, 108));
         Amount.setFont(new Font("sansserif", Font.PLAIN, 20));
-        add(Amount,"pos 210 185");
+        add(Amount,"pos 210 245");
 
         AmountText.setHint("Up to to 6 Digits");
-        add(AmountText,"width 250,pos 290 180");
+        add(AmountText,"width 250,pos 290 240");
         AmountText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -78,14 +82,14 @@ public class FundTransferPanel extends JPanel{
 
         amountlabel.setFont(labelfont);
         amountlabel.setForeground(Color.RED);
-        add(amountlabel,"pos 290 220");
+        add(amountlabel,"pos 290 280");
 
         Pin.setForeground(new Color(102, 108, 108));
         Pin.setFont(new Font("sansserif", Font.PLAIN, 20));
-        add(Pin,"pos 230 250");
+        add(Pin,"pos 230 310");
 
         PinText.setHint("4 Digit Pin");
-        add(PinText,"width 250,pos 290 245");
+        add(PinText,"width 250,pos 290 305");
         PinText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -99,10 +103,18 @@ public class FundTransferPanel extends JPanel{
 
         pinlabel.setFont(labelfont);
         pinlabel.setForeground(Color.RED);
-        add(pinlabel,"pos 290 285");
+        add(pinlabel,"pos 290 345");
 
         FundTransferButton.setFont(new Font("sansserif",Font.BOLD,18));
-        add(FundTransferButton,"width 100,height 40,pos 290 315");
+        add(FundTransferButton,"width 100,height 40,pos 290 375");
+
+        TransactionHistory.setFont(new Font("sansserif",Font.BOLD,18));
+        add(TransactionHistory,"width 100,height 40,pos 10 10");
+
+        JLabel transactionlabel = new JLabel("Transaction History");
+        transactionlabel.setForeground(bgcolor);
+        transactionlabel.setFont(new Font("sansserif",Font.BOLD,36));
+
     }
 
     protected void paintComponent(Graphics g) {
@@ -134,11 +146,48 @@ public class FundTransferPanel extends JPanel{
         });
     }
 
+    public void showTransactionHistory() {
+        JFrame transactionHistoryFrame = new JFrame("Transaction History");
+        transactionHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JLabel titleLabel = new JLabel("Transaction History");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        panel.add(titleLabel, BorderLayout.NORTH);
+
+        // Create a JTable to display transactions
+        DefaultTableModel model = new DefaultTableModel();
+        JTable table = new JTable(model);
+
+        model.addColumn("Sent From");
+        model.addColumn("Sent To");
+        model.addColumn("Date");
+        model.addColumn("Time");
+        model.addColumn("Amount");
+        model.addColumn("Balance");
+        model.addRow(new Object[]{"101123581321","101123581322", "10/13/2004", "12:00 PM", 10000.00,20000.00});
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        transactionHistoryFrame.add(panel);
+        transactionHistoryFrame.pack();
+        transactionHistoryFrame.setSize(750,700);
+        transactionHistoryFrame.setLocationRelativeTo(null); // Center the frame on screen
+        transactionHistoryFrame.setVisible(true);
+    }
+
     public FundTransferPanel getfundtransferpanel(){
         return FundTransferPanel.this;
     }
 
     public JButton getTransferFundsButton(){
         return FundTransferButton;
+    }
+
+    public JButton getTransactionHistoryButton(){
+        return TransactionHistory;
     }
 }

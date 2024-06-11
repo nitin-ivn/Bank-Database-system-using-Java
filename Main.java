@@ -104,6 +104,13 @@ public class Main {
                 }
             }
         });
+
+        homepage.setTransactionHistoryButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                homepage.getFundTransferPanel().showTransactionHistory();
+            }
+        });
     }
 
     private static int random(){
