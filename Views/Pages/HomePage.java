@@ -38,7 +38,7 @@ public class HomePage {
     public HomePage(UserDetails userDetails){
         depositPanel = new DepositPanel();
         loansPanel = new LoansPanel();
-        fundTransferPanel = new FundTransferPanel();
+        fundTransferPanel = new FundTransferPanel(userDetails);
         accountspanel = new AccountDetailsPanel(userDetails);
         profilePanel = new ProfilePanel(userDetails);
         this.userDetails = userDetails;

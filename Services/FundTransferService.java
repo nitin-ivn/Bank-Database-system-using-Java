@@ -1,9 +1,15 @@
 package services;
 
+import Model.Transactions;
 import Model.UserDetails;
 import Views.Componenets.FundTransferPanel;
 
 import javax.swing.*;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FundTransferService {
@@ -19,7 +25,6 @@ public class FundTransferService {
     public boolean validateFundTransfer(){
         if(formfilled()){
             if(validateDetails() && ValidatePin()) {
-//                database.setTransactionDetails();
                 return true;
             }
         }
@@ -77,6 +82,22 @@ public class FundTransferService {
             JOptionPane.showMessageDialog(fundTransferPanel,"Pin is either wrong or not set. (You can set it in profile by giving address details)");
         }
         return false;
+    }
+
+    public Transactions getTransaction(){
+        Transactions transactions = new Transactions();
+        transactions.senders_AccountNo = userDetails.AccountNumber;
+        transactions.receivers_AccountNo = Long.valueOf(fundTransferPanel.AccountNumberText.getText());
+        transactions.amount = Integer.parseInt(fundTransferPanel.AmountText.getText());
+        transactions.balance = userDetails.Balance;
+
+        LocalDate currentDate = LocalDate.now();
+        transactions.date = Date.valueOf(currentDate);
+
+        LocalTime currentTime = LocalTime.now();
+        transactions.time = Time.valueOf(currentTime);
+        transactions.transactionperformed = "Fund Transferred";
+        return transactions;
     }
 
     public long getAccNum(){

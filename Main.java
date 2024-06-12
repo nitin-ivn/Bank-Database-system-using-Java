@@ -1,3 +1,4 @@
+import Model.Transactions;
 import Model.UserDetails;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
@@ -6,6 +7,7 @@ import services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -87,6 +89,7 @@ public class Main {
                 if(depositService.validateDeposit()){
                     Database.UpdateBalance(userDetails.Balance + depositService.AddBalance(),userDetails.AccountNumber);
                     Database.setBalance();
+                    Database.insertTransactions(depositService.getTransaction());
                     JOptionPane.showMessageDialog(homepage.getDepositPanel(),"Amount Deposited Successfully");
                     homepage.getDepositPanel().qrpanel.setVisible(false);
                 }
@@ -100,6 +103,9 @@ public class Main {
                 if(fundTransferService.validateFundTransfer()){
                     int bal = Database.getReceiverBalance(fundTransferService.getAccNum());
                     Database.UpdateBalance(bal + fundTransferService.getAmount(),fundTransferService.getAccNum());
+                    Database.UpdateBalance(userDetails.Balance - fundTransferService.getAmount(),userDetails.AccountNumber);
+                    Database.setBalance();
+                    Database.insertTransactions(fundTransferService.getTransaction());
                     JOptionPane.showMessageDialog(homepage.getFundTransferPanel(),"Amount Transferred Successfully");
                 }
             }
@@ -108,7 +114,7 @@ public class Main {
         homepage.setTransactionHistoryButtonActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homepage.getFundTransferPanel().showTransactionHistory();
+                homepage.getFundTransferPanel().showTransactionHistory(Database.getTransactionsByAccountNumber(userDetails.AccountNumber));
             }
         });
     }

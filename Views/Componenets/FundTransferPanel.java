@@ -1,5 +1,7 @@
 package Views.Componenets;
 
+import Model.Transactions;
+import Model.UserDetails;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -9,10 +11,14 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class FundTransferPanel extends JPanel{
+    UserDetails userDetails;
+
     private final Font labelfont = new Font("sansserif", Font.BOLD,10);
     Color bgcolor = new Color(71,75,75);
 
@@ -33,8 +39,8 @@ public class FundTransferPanel extends JPanel{
     MyButton FundTransferButton = new MyButton("Transfer Funds");
     MyButton TransactionHistory = new MyButton("History");
 
-    public FundTransferPanel(){
-
+    public FundTransferPanel(UserDetails userDetails){
+        this.userDetails = userDetails;
 
         setBackground(Color.WHITE);
         setLayout(new MigLayout("fill"));
@@ -146,7 +152,7 @@ public class FundTransferPanel extends JPanel{
         });
     }
 
-    public void showTransactionHistory() {
+    public void showTransactionHistory(List<Transactions> transactionsList) {
         JFrame transactionHistoryFrame = new JFrame("Transaction History");
         transactionHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -157,17 +163,24 @@ public class FundTransferPanel extends JPanel{
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        // Create a JTable to display transactions
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
 
+        model.addColumn("Transaction");
         model.addColumn("Sent From");
         model.addColumn("Sent To");
         model.addColumn("Date");
         model.addColumn("Time");
         model.addColumn("Amount");
         model.addColumn("Balance");
-        model.addRow(new Object[]{"101123581321","101123581322", "10/13/2004", "12:00 PM", 10000.00,20000.00});
+        for (int i = transactionsList.size() - 1; i >= 0; i--) {
+            Transactions transactions = transactionsList.get(i);
+            if (transactions.receivers_AccountNo == userDetails.AccountNumber) {
+                model.addRow(new Object[]{"Funds Received", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount, transactions.balance});
+            }else if(transactions.senders_AccountNo == userDetails.AccountNumber){
+                model.addRow(new Object[]{"Funds Transferred", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount, transactions.balance});
+            }
+        }
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);

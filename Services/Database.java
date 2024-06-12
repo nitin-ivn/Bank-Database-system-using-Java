@@ -3,10 +3,12 @@ package services;
 
 import Model.Address;
 import Model.RegisterDetails;
+import Model.Transactions;
 import Model.UserDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     static String Url = "jdbc:mysql://127.0.0.1:3306/Bank";
@@ -310,5 +312,75 @@ public class Database {
             }
         }
         return bal;
+    }
+
+    public static void insertTransactions(Transactions transactions){
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        try{
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "INSERT INTO transactions_table (Senders_AccountNo,Recievers_AccountNo,date,time,amount,balance,TransactionPerformed) VALUES(?,?,?,?,?,?,?)";
+            statement = connection1.prepareStatement(query);
+            statement.setLong(1,transactions.senders_AccountNo);
+            statement.setLong(2,transactions.receivers_AccountNo);
+            statement.setDate(3,transactions.date);
+            statement.setTime(4,transactions.time);
+            statement.setInt(5,transactions.amount);
+            statement.setInt(6,getReceiverBalance(userDetails.AccountNumber));
+            statement.setString(7,transactions.transactionperformed);
+            int n = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static List<Transactions> getTransactionsByAccountNumber(long accountNumber) {
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        List<Transactions> transactions = new ArrayList<>();
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "SELECT * FROM transactions_table WHERE Senders_AccountNo = ? OR Recievers_AccountNo = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setLong(1, accountNumber);
+            statement.setLong(2, accountNumber);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Transactions transaction = new Transactions();
+                transaction.senders_AccountNo = rs.getLong("Senders_AccountNo");
+                transaction.receivers_AccountNo = rs.getLong("Recievers_AccountNo");
+                transaction.date = rs.getDate("date");
+                transaction.time = rs.getTime("time");
+                transaction.amount = rs.getInt("amount");
+                transaction.balance = rs.getInt("balance");
+                transaction.transactionperformed = rs.getString("TransactionPerformed");
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return transactions;
     }
 }
