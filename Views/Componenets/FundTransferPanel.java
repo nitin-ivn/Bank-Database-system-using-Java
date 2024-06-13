@@ -172,15 +172,25 @@ public class FundTransferPanel extends JPanel{
         model.addColumn("Date");
         model.addColumn("Time");
         model.addColumn("Amount");
-        model.addColumn("Balance");
         for (int i = transactionsList.size() - 1; i >= 0; i--) {
             Transactions transactions = transactionsList.get(i);
-            if (transactions.receivers_AccountNo == userDetails.AccountNumber) {
-                model.addRow(new Object[]{"Funds Received", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount, transactions.balance});
-            }else if(transactions.senders_AccountNo == userDetails.AccountNumber){
-                model.addRow(new Object[]{"Funds Transferred", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount, transactions.balance});
+            if (transactions.receivers_AccountNo == userDetails.AccountNumber && transactions.senders_AccountNo != userDetails.AccountNumber) {
+                model.addRow(new Object[]{"Funds Received", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, "+"+transactions.amount});
+            }else if(transactions.receivers_AccountNo == userDetails.AccountNumber){
+                model.addRow(new Object[]{"Deposit", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, "+"+transactions.amount});
+            }else{
+                model.addRow(new Object[]{transactions.transactionperformed, transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time,"-"+ transactions.amount});
             }
         }
+
+//        for (int i = transactionsList.size() - 1; i >= 0; i--) {
+//            Transactions transactions = transactionsList.get(i);
+//            if (transactions.receivers_AccountNo == userDetails.AccountNumber && transactions.senders_AccountNo != userDetails.AccountNumber) {
+//                model.addRow(new Object[]{"Funds Received", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount});
+//            }else{
+//                model.addRow(new Object[]{transactions.transactionperformed, transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, transactions.amount});
+//            }
+//        }
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
