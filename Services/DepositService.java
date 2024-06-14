@@ -46,7 +46,6 @@ public class DepositService {
         transactions.senders_AccountNo = userDetails.AccountNumber;
         transactions.receivers_AccountNo = userDetails.AccountNumber;
         transactions.amount = Integer.parseInt(depositPanel.AmountText.getText());
-        transactions.balance = userDetails.Balance;
 
         LocalDate currentDate = LocalDate.now();
         transactions.date = Date.valueOf(currentDate);

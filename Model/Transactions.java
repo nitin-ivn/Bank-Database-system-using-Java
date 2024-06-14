@@ -10,5 +10,4 @@ public class Transactions {
     public Date date;
     public Time time;
     public int amount;
-    public int balance;
 }

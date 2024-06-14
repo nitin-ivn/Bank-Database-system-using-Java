@@ -34,7 +34,7 @@ public class FundTransferPanel extends JPanel{
 
     public JLabel pinlabel = new JLabel();
     JLabel Pin = new JLabel("Pin:");
-    public MyTextField PinText = new MyTextField();
+    public MyPasswordField PinText = new MyPasswordField();
 
     MyButton FundTransferButton = new MyButton("Transfer Funds");
     MyButton TransactionHistory = new MyButton("History");
@@ -198,7 +198,7 @@ public class FundTransferPanel extends JPanel{
         transactionHistoryFrame.add(panel);
         transactionHistoryFrame.pack();
         transactionHistoryFrame.setSize(750,700);
-        transactionHistoryFrame.setLocationRelativeTo(null); // Center the frame on screen
+        transactionHistoryFrame.setLocationRelativeTo(null);
         transactionHistoryFrame.setVisible(true);
     }
 

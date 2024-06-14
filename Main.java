@@ -1,4 +1,3 @@
-import Model.Transactions;
 import Model.UserDetails;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
@@ -7,7 +6,6 @@ import services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -67,10 +65,10 @@ public class Main {
                     userDetails = Database.GetUserDetails();
                     if(userDetails.Pin == 0) {
                         int pin = random();
-                        Database.SetUserPin(pin);
                         JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Address is Set Successfully and your PIN is "+pin);
+                        Database.SetUserPin(pin);
                     }else{
-                        JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address is Updated Successfully and dumb your pin is "+userDetails.Pin);
+                        JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address is Updated Successfully");
                     }
                 }
             }

@@ -24,7 +24,7 @@ public class FundTransferService {
 
     public boolean validateFundTransfer(){
         if(formfilled()){
-            if(validateDetails() && ValidatePin()) {
+            if(validateDetails() && ValidatePin() && validateAmount()) {
                 return true;
             }
         }
@@ -84,12 +84,19 @@ public class FundTransferService {
         return false;
     }
 
+    private boolean validateAmount(){
+        if(Integer.parseInt(fundTransferPanel.AmountText.getText()) > Database.getReceiverBalance(userDetails.AccountNumber)){
+            JOptionPane.showMessageDialog(fundTransferPanel,"Insufficient Balance");
+            return false;
+        }
+        return true;
+    }
+
     public Transactions getTransaction(){
         Transactions transactions = new Transactions();
         transactions.senders_AccountNo = userDetails.AccountNumber;
         transactions.receivers_AccountNo = Long.valueOf(fundTransferPanel.AccountNumberText.getText());
         transactions.amount = Integer.parseInt(fundTransferPanel.AmountText.getText());
-        transactions.balance = userDetails.Balance;
 
         LocalDate currentDate = LocalDate.now();
         transactions.date = Date.valueOf(currentDate);

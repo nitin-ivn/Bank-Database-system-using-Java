@@ -319,15 +319,14 @@ public class Database {
         PreparedStatement statement = null;
         try{
             connection1 = DriverManager.getConnection(Url,Username,Password);
-            String query = "INSERT INTO transactions_table (Senders_AccountNo,Recievers_AccountNo,date,time,amount,balance,TransactionPerformed) VALUES(?,?,?,?,?,?,?)";
+            String query = "INSERT INTO transactions_table (Senders_AccountNo,Recievers_AccountNo,date,time,amount,TransactionPerformed) VALUES(?,?,?,?,?,?)";
             statement = connection1.prepareStatement(query);
             statement.setLong(1,transactions.senders_AccountNo);
             statement.setLong(2,transactions.receivers_AccountNo);
             statement.setDate(3,transactions.date);
             statement.setTime(4,transactions.time);
             statement.setInt(5,transactions.amount);
-            statement.setInt(6,getReceiverBalance(userDetails.AccountNumber));
-            statement.setString(7,transactions.transactionperformed);
+            statement.setString(6,transactions.transactionperformed);
             int n = statement.executeUpdate();
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -363,7 +362,6 @@ public class Database {
                 transaction.date = rs.getDate("date");
                 transaction.time = rs.getTime("time");
                 transaction.amount = rs.getInt("amount");
-                transaction.balance = rs.getInt("balance");
                 transaction.transactionperformed = rs.getString("TransactionPerformed");
                 transactions.add(transaction);
             }

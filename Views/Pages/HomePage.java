@@ -152,15 +152,15 @@ public class HomePage {
         sidepanel.add(LogoutButton,"width 110, height 40,pos 190 600");
 
         frame.add(sidepanel,"width 30%, pos 0al 0 n 100%");
-        frame.add(depositPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(accountspanel,"width 70%, pos 1al 0 n 100%");
+        frame.add(depositPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(profilePanel,"width 70%, pos 1al 0 n 100%");
         frame.add(loansPanel,"width 70%, pos 1al 0 n 100%");
         frame.add(fundTransferPanel,"width 70%, pos 1al 0 n 100%");
 
-        accountspanel.setVisible(false);
+        accountspanel.setVisible(true);
         profilePanel.setVisible(false);
-        depositPanel.setVisible(true);
+        depositPanel.setVisible(false);
         loansPanel.setVisible(false);
         fundTransferPanel.setVisible(false);
         frame.setVisible(true);
