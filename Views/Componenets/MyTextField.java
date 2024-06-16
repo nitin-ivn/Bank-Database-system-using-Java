@@ -2,6 +2,10 @@ package Views.Componenets;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 
 public class MyTextField extends JTextField {
@@ -27,6 +31,24 @@ public class MyTextField extends JTextField {
         }
     }
 
+    public void setLimit(int limit){
+        PlainDocument doc1 = (PlainDocument) MyTextField.this.getDocument();
+        doc1.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (fb.getDocument().getLength() + string.length() <= limit && string.matches("\\d+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (fb.getDocument().getLength() + text.length() - length <= limit && text.matches("\\d+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+    }
 
     public void setHint(String hint) {
         this.hint = hint;

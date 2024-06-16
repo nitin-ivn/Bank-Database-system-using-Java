@@ -6,6 +6,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MyComboBox extends JComboBox<String> {
     private String hint;
@@ -14,7 +15,7 @@ public class MyComboBox extends JComboBox<String> {
         super(items);
         setUI(new MyComboBoxUI());
         setFont(new Font("sansserif", Font.PLAIN, 13));
-        setBorder(new EmptyBorder(5, 5, 5, 5));
+        setBorder(new EmptyBorder(5, 10, 5, 5));
     }
 
     public void setHint(String hint) {
@@ -30,16 +31,11 @@ public class MyComboBox extends JComboBox<String> {
 
         @Override
         protected JButton createArrowButton() {
-            JButton button = new JButton();
-            button.setVisible(false);
-            return button;
-        }
-
-        @Override
-        protected ComboPopup createPopup() {
-            BasicComboPopup popup = (BasicComboPopup) super.createPopup();
-            popup.setBorder(new EmptyBorder(15,12,10,12));
-            return popup;
+            JButton customArrowButton = new JButton(new ImageIcon("Icons/arrow.png"));
+            customArrowButton.setContentAreaFilled(false);
+            customArrowButton.setFocusPainted(false);
+            customArrowButton.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5)); // Restore default arrow button
+            return customArrowButton;
         }
     }
 

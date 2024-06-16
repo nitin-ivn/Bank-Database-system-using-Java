@@ -6,10 +6,6 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.util.List;
 import java.awt.event.KeyAdapter;
@@ -63,7 +59,7 @@ public class FundTransferPanel extends JPanel{
                 }
             }
         });
-        setLimit(AccountNumberText,12);
+        AccountNumberText.setLimit(12);
 
         Accountlabel.setFont(labelfont);
         Accountlabel.setForeground(Color.RED);
@@ -84,7 +80,7 @@ public class FundTransferPanel extends JPanel{
                 }
             }
         });
-        setLimit(AmountText,6);
+        AmountText.setLimit(6);
 
         amountlabel.setFont(labelfont);
         amountlabel.setForeground(Color.RED);
@@ -105,7 +101,7 @@ public class FundTransferPanel extends JPanel{
                 }
             }
         });
-        setLimit(PinText,4);
+        PinText.setLimit(4);
 
         pinlabel.setFont(labelfont);
         pinlabel.setForeground(Color.RED);
@@ -131,25 +127,6 @@ public class FundTransferPanel extends JPanel{
         int lineWidth = title.getWidth() + 170; // Adjust for the extension on both sides
         int lineHeight = 2; // Adjust the height of the line as needed
         g.fillRect(lineX, lineY, lineWidth, lineHeight);
-    }
-
-    private void setLimit(JTextField field,int limit){
-        PlainDocument doc1 = (PlainDocument) field.getDocument();
-        doc1.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (fb.getDocument().getLength() + string.length() <= limit && string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-
-            @Override
-            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (fb.getDocument().getLength() + text.length() - length <= limit && text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
     }
 
     public void showTransactionHistory(List<Transactions> transactionsList) {

@@ -9,6 +9,8 @@ import java.awt.*;
 public class AccountDetailsPanel extends JPanel {
     UserDetails userDetails;
     Color bgcolor = new Color(71, 75, 75);
+    Color labelcolor = new Color(102, 108, 108);
+    Font labelfont = new Font("sansserif", Font.PLAIN, 20);
     JLabel AccountDetails = new JLabel("Account Details");
 
     JLabel FirstName = new JLabel("First Name       :");
@@ -40,8 +42,8 @@ public class AccountDetailsPanel extends JPanel {
 
         setPreferredSize(new Dimension(400, 100));
 
-        FirstName.setForeground(new Color(102, 108, 108));
-        FirstName.setFont(new Font("sansserif", Font.PLAIN, 20));
+        FirstName.setForeground(labelcolor);
+        FirstName.setFont(labelfont);
         add(FirstName, "pos 190 140");
 
         firstnameValue.setForeground(bgcolor);
@@ -49,8 +51,8 @@ public class AccountDetailsPanel extends JPanel {
         firstnameValue.setText("userDetails.FirstName");
         add(firstnameValue,"pos 350 140");
 
-        LastName.setForeground(new Color(102, 108, 108));
-        LastName.setFont(new Font("sansserif", Font.PLAIN, 20));
+        LastName.setForeground(labelcolor);
+        LastName.setFont(labelfont);
         add(LastName, "pos 190 190");
 
         lastnameValue.setForeground(bgcolor);
@@ -58,8 +60,8 @@ public class AccountDetailsPanel extends JPanel {
         lastnameValue.setText("userDetails.LastName");
         add(lastnameValue,"pos 350 190");
 
-        AccountNumber.setForeground(new Color(102, 108, 108));
-        AccountNumber.setFont(new Font("sansserif", Font.PLAIN, 20));
+        AccountNumber.setForeground(labelcolor);
+        AccountNumber.setFont(labelfont);
         add(AccountNumber, "pos 170 240");
 
         accountnumbervalue.setForeground(bgcolor);
@@ -67,8 +69,8 @@ public class AccountDetailsPanel extends JPanel {
         accountnumbervalue.setText("userDetails.AccountNo");
         add(accountnumbervalue,"pos 350 240");
 
-        DOB.setForeground(new Color(102, 108, 108));
-        DOB.setFont(new Font("sansserif", Font.PLAIN, 20));
+        DOB.setForeground(labelcolor);
+        DOB.setFont(labelfont);
         add(DOB, "pos 220 290");
 
         dobvalue.setForeground(bgcolor);
@@ -76,8 +78,8 @@ public class AccountDetailsPanel extends JPanel {
         dobvalue.setText("userDetails.DOB");
         add(dobvalue,"pos 350 290");
 
-        Phonenumber.setForeground(new Color(102, 108, 108));
-        Phonenumber.setFont(new Font("sansserif", Font.PLAIN, 20));
+        Phonenumber.setForeground(labelcolor);
+        Phonenumber.setFont(labelfont);
         add(Phonenumber, "pos 175 340");
 
         phonenumbervalue.setForeground(bgcolor);
@@ -85,8 +87,8 @@ public class AccountDetailsPanel extends JPanel {
         phonenumbervalue.setText("userDetails.Phone");
         add(phonenumbervalue,"pos 350 340");
 
-        Email.setForeground(new Color(102, 108, 108));
-        Email.setFont(new Font("sansserif", Font.PLAIN, 20));
+        Email.setForeground(labelcolor);
+        Email.setFont(labelfont);
         add(Email, "pos 220 390");
 
         emailvalue.setForeground(bgcolor);

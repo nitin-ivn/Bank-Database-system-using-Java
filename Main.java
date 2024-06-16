@@ -1,4 +1,5 @@
 import Model.UserDetails;
+import Views.Componenets.NewLoanFrame;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
 import services.*;
@@ -13,7 +14,7 @@ public class Main {
     static HomePage homepage;
     static UserDetails userDetails;
     public static void main(String[] args) {
-        setHomepage();
+        new NewLoanFrame();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
