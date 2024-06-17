@@ -1,10 +1,7 @@
 package services;
 
 
-import Model.Address;
-import Model.RegisterDetails;
-import Model.Transactions;
-import Model.UserDetails;
+import Model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -380,5 +377,37 @@ public class Database {
             }
         }
         return transactions;
+    }
+
+    public static void InsertLoanDetails(LoanDetails loanDetails){
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "INSERT INTO Loan_Details(Account_Number,TypeOfLoan,Amount,DurationInYears,MonthsRemaining,IntrestRate,EMIperMonth,LoanActive) VALUES (?,?,?,?,?,?,?,?)";
+            statement = connection1.prepareStatement(query);
+            statement.setLong(1,userDetails.AccountNumber);
+            statement.setString(2,loanDetails.TypeofLoan);
+            statement.setInt(3,loanDetails.loanAmount);
+            statement.setInt(4,loanDetails.IntrestRate);
+            statement.setInt(5,loanDetails.NumofMonthsRemaining);
+            statement.setInt(6,loanDetails.IntrestRate);
+            statement.setDouble(7,loanDetails.Emi);
+            statement.setBoolean(8,loanDetails.loanActive);
+            int rs = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

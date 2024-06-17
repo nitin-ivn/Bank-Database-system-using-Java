@@ -203,6 +203,14 @@ public class HomePage {
             fundTransferPanel.getTransactionHistoryButton().addActionListener(listener);
     }
 
+    public void setApplicationButtonActionListener(ActionListener listener){
+            loansPanel.getApplybutton().addActionListener(listener);
+    }
+
+    public NewLoanFrame getNewloanFrame(){
+        return loansPanel.getApplicationframe();
+    }
+
     public ProfilePanel getProfilePanel(){
         return profilePanel.getProfilePanel();
     }

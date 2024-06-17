@@ -5,6 +5,7 @@ import Views.Pages.LoginAndRegisterPage;
 import services.*;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -14,7 +15,7 @@ public class Main {
     static HomePage homepage;
     static UserDetails userDetails;
     public static void main(String[] args) {
-        new NewLoanFrame();
+        setHomepage();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
@@ -51,6 +52,8 @@ public class Main {
         Profile profile = new Profile(homepage.getProfilePanel());
         DepositService depositService = new DepositService(homepage.getDepositPanel(),userDetails);
         FundTransferService fundTransferService =new FundTransferService(homepage.getFundTransferPanel(),userDetails);
+        NewLoanService newLoanService = new NewLoanService(homepage.getNewloanFrame());
+
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,6 +119,16 @@ public class Main {
                 homepage.getFundTransferPanel().showTransactionHistory(Database.getTransactionsByAccountNumber(userDetails.AccountNumber));
             }
         });
+
+        homepage.setApplicationButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(newLoanService.validateApplication()) {
+                    Database.InsertLoanDetails(newLoanService.getLoanDetails());
+                    JOptionPane.showMessageDialog(homepage.getNewloanFrame(), "Application Submitted Successfully");
+                }
+            }
+        });m
     }
 
     private static int random(){

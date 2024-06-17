@@ -91,7 +91,7 @@ public class PanelLogin extends JLayeredPane {
         register.add(LastName,"width 195,pos 255 110");
 
         Labellastname.setForeground(Color.RED);
-        Labellastname.setFont(new Font("sansserif",Font.PLAIN,10));
+        Labellastname.setFont(labelfont);
         register.add(Labellastname,"pos 255 155");
 
         RAccountNumber.setHint("Account Number");

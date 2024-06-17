@@ -15,6 +15,7 @@ public class LoansPanel extends JPanel{
     Font titlefont = new Font("sansserif",Font.BOLD,36);
 
     JLabel title = new JLabel("Loans");
+    NewLoanFrame newLoanFrame = new NewLoanFrame();
 
     JPanel HomeLoansPanel = new JPanel();
     JPanel VehicleLoansPanel = new JPanel();
@@ -49,7 +50,7 @@ public class LoansPanel extends JPanel{
 
         JLabel personalltitle = new JLabel("Personal Loans");
         personalltitle.setFont(titlefont);
-        PersonalLoansPanel.setBackground(Color.RED);
+        PersonalLoansPanel.setBackground(Color.WHITE);
         PersonalLoansPanel.setLayout(new MigLayout("fill"));
         PersonalLoansPanel.add(personalltitle,"pos 10 10");
         add(PersonalLoansPanel,"width 90%,height 40%,pos 40 150");
@@ -68,7 +69,7 @@ public class LoansPanel extends JPanel{
         newloanbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewLoanFrame newLoanFrame = new NewLoanFrame();
+                newLoanFrame.gui();
             }
         });
 
@@ -100,9 +101,13 @@ public class LoansPanel extends JPanel{
         });
     }
 
+    public NewLoanFrame getApplicationframe(){
+        return newLoanFrame.getApplicationPanel();
+    }
 
-
-
+    public JButton getApplybutton(){
+        return newLoanFrame.getApplyButton();
+    }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

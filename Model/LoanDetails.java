@@ -2,9 +2,10 @@ package Model;
 
 public class LoanDetails {
     public String TypeofLoan;
-    public int Timeperiodofloan;
-    public int Emi;
-    public String Occupation;
-    public int SalaryperAnnum;
-    public int intrestRate;
+    public int DurationInYears;
+    public int loanAmount;
+    public Double Emi;
+    public int IntrestRate;
+    public int NumofMonthsRemaining;
+    public boolean loanActive;
 }
