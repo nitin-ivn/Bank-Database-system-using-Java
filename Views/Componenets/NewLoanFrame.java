@@ -78,6 +78,7 @@ public class NewLoanFrame extends JFrame{
                         DurationText.addItem("4");
                         DurationText.addItem("6");
                         DurationText.addItem("8");
+                        DurationText.setSelectedIndex(0);
                     } else if (LoanType.getSelectedIndex() == 2) {
                         DurationText.setSelectedIndex(-1);
                         loanAmountText.setText("");
@@ -89,6 +90,7 @@ public class NewLoanFrame extends JFrame{
                         DurationText.addItem("5");
                         DurationText.addItem("6");
                         DurationText.addItem("7");
+                        DurationText.setSelectedIndex(0);
                     } else if (LoanType.getSelectedIndex() == 0) {
                         DurationText.setSelectedIndex(-1);
                         loanAmountText.setText("");
@@ -99,6 +101,7 @@ public class NewLoanFrame extends JFrame{
                         DurationText.addItem("15");
                         DurationText.addItem("20");
                         DurationText.addItem("25");
+                        DurationText.setSelectedIndex(0);
                     }
                 }catch (Exception ex){
                     LoanType.setSelectedIndex(index);

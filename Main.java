@@ -1,11 +1,9 @@
 import Model.UserDetails;
-import Views.Componenets.NewLoanFrame;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
 import services.*;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -128,7 +126,20 @@ public class Main {
                     JOptionPane.showMessageDialog(homepage.getNewloanFrame(), "Application Submitted Successfully");
                 }
             }
-        });m
+        });
+
+        homepage.setShowLoansButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(homepage.getLoansPanel().comboBox.getSelectedIndex() == 0){
+                    homepage.getLoansPanel().setHomePanelTable(Database.getLoanDetails((String) homepage.getLoansPanel().comboBox.getSelectedItem()));
+                }else if(homepage.getLoansPanel().comboBox.getSelectedIndex() == 1){
+                    homepage.getLoansPanel().setVehiclePanelTable(Database.getLoanDetails((String) homepage.getLoansPanel().comboBox.getSelectedItem()));
+                }else if(homepage.getLoansPanel().comboBox.getSelectedIndex() == 2){
+                    homepage.getLoansPanel().setPersonalPanelTable(Database.getLoanDetails((String) homepage.getLoansPanel().comboBox.getSelectedItem()));
+                }
+            }
+        });
     }
 
     private static int random(){

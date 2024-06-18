@@ -95,7 +95,7 @@ public class NewLoanService {
         LoanDetails loanDetails = new LoanDetails();
         loanDetails.TypeofLoan = (String) newLoanFrame.LoanType.getSelectedItem();
         loanDetails.loanAmount = Integer.parseInt(newLoanFrame.loanAmountText.getText());
-        loanDetails.DurationInYears = Integer.parseInt((String) Objects.requireNonNull(newLoanFrame.DurationText.getSelectedItem()));
+        loanDetails.DurationInYears = Integer.parseInt(Objects.requireNonNull(newLoanFrame.DurationText.getSelectedItem()).toString());
         loanDetails.IntrestRate = 12;
         loanDetails.Emi = Double.parseDouble(newLoanFrame.EMItext.getText());
         loanDetails.loanActive = true;

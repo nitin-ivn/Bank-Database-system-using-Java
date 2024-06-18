@@ -207,6 +207,14 @@ public class HomePage {
             loansPanel.getApplybutton().addActionListener(listener);
     }
 
+    public void setShowLoansButtonActionListener(ActionListener listener){
+            loansPanel.getShowLoansButton().addActionListener(listener);
+    }
+
+    public LoansPanel getLoansPanel(){
+        return loansPanel.getLoanPanel();
+    }
+
     public NewLoanFrame getNewloanFrame(){
         return loansPanel.getApplicationframe();
     }

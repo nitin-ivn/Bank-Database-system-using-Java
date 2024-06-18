@@ -1,6 +1,8 @@
 package Model;
 
 public class LoanDetails {
+    public long AccountNumber;
+    public int loanID;
     public String TypeofLoan;
     public int DurationInYears;
     public int loanAmount;

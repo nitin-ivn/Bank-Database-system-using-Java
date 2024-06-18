@@ -389,7 +389,7 @@ public class Database {
             statement.setLong(1,userDetails.AccountNumber);
             statement.setString(2,loanDetails.TypeofLoan);
             statement.setInt(3,loanDetails.loanAmount);
-            statement.setInt(4,loanDetails.IntrestRate);
+            statement.setInt(4,loanDetails.DurationInYears);
             statement.setInt(5,loanDetails.NumofMonthsRemaining);
             statement.setInt(6,loanDetails.IntrestRate);
             statement.setDouble(7,loanDetails.Emi);
@@ -409,5 +409,51 @@ public class Database {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static List<LoanDetails> getLoanDetails(String TypeofLoan){
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List<LoanDetails> loanDetails = new ArrayList<>();
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "SELECT * FROM Loan_Details WHERE TypeOfLoan = ? AND Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setString(1,TypeofLoan);
+            statement.setLong(2,userDetails.AccountNumber);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                LoanDetails loanDetails1 = new LoanDetails();
+                loanDetails1.loanID = rs.getInt("Loan_ID");
+                loanDetails1.TypeofLoan = rs.getString("TypeOfLoan");
+                loanDetails1.loanAmount = rs.getInt("Amount");
+                loanDetails1.DurationInYears = rs.getInt("DurationInYears");
+                loanDetails1.NumofMonthsRemaining = rs.getInt("MonthsRemaining");
+                loanDetails1.IntrestRate = rs.getInt("IntrestRate");
+                loanDetails1.Emi = rs.getDouble("EMIperMonth");
+                loanDetails1.loanActive = rs.getBoolean("LoanActive");
+                loanDetails1.AccountNumber = userDetails.AccountNumber;
+                loanDetails.add(loanDetails1);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return loanDetails;
+
     }
 }
