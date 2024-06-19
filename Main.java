@@ -149,6 +149,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(paymentService.validateNext()) {
                     homepage.getLoansPanel().getPayLoanButton().setVisible(true);
+                    int res = paymentService.setAmount();
                 }
             }
         });

@@ -105,7 +105,12 @@ public class LoansPanel extends JPanel{
         add(Paymentsbutton,"width 100,height 40,pos 600 10");
         Paymentsbutton.setVisible(false);
 
-        setPayments();
+        Paymentsbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setPayments();
+            }
+        });
     }
 
     public void setHomePanelTable(List<LoanDetails> loanDetails){
@@ -138,6 +143,7 @@ public class LoansPanel extends JPanel{
         HomeLoansPanel.setVisible(true);
         PersonalLoansPanel.setVisible(false);
         VehicleLoansPanel.setVisible(false);
+        Paymentsbutton.setVisible(true);
 
     }
 
@@ -170,6 +176,7 @@ public class LoansPanel extends JPanel{
         HomeLoansPanel.setVisible(false);
         PersonalLoansPanel.setVisible(false);
         VehicleLoansPanel.setVisible(true);
+        Paymentsbutton.setVisible(true);
 
     }
 
@@ -201,6 +208,7 @@ public class LoansPanel extends JPanel{
         HomeLoansPanel.setVisible(false);
         PersonalLoansPanel.setVisible(true);
         VehicleLoansPanel.setVisible(false);
+        Paymentsbutton.setVisible(true);
     }
 
     public void setPayments(){

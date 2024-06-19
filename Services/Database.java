@@ -531,13 +531,13 @@ public class Database {
     }
 
     public static void UpdateLoanDetails(int numOfMonthsRemaining,boolean LoanActive,int Loan_ID){
-        LoanDetails loanDetails = new LoanDetails();
         Connection connection1 = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
         try {
             connection1 = DriverManager.getConnection(Url, Username, Password);
-            String query = "UPDATE Loan_Details SET MonthsRemaining = ? AND LoanActive = ? WHERE Loan_ID = ?";
+            String query = "UPDATE Loan_Details SET MonthsRemaining = ?,LoanActive = ? WHERE Loan_ID = ?";
+            System.out.println(numOfMonthsRemaining);
             statement = connection1.prepareStatement(query);
             statement.setInt(1,numOfMonthsRemaining);
             statement.setBoolean(2,LoanActive);
