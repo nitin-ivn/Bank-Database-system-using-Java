@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    static String Url = "jdbc:mysql://127.0.0.1:3306/Bank";
-    static String Username = "root";
-    static String Password = "database";
+    static final String Url = "jdbc:mysql://127.0.0.1:3306/Bank";
+    static final String Username = "root";
+    static final String Password = "database";
     final String url = "jdbc:mysql://127.0.0.1:3306/Bank";
     final String username = "root";
     final String password = "database";
@@ -29,7 +29,6 @@ public class Database {
     public ArrayList<Long> getAccountNumbers() {
         ArrayList<Long> accountnum = new ArrayList<>();
         try {
-
             Statement statement = connection.createStatement();
             String query = "SELECT Account_Number FROM User_Details";
             ResultSet rs = statement.executeQuery(query);
@@ -454,6 +453,109 @@ public class Database {
             }
         }
         return loanDetails;
+    }
 
+    public static boolean ValidLoanID(int loanID){
+        ArrayList<Integer> loanid = new ArrayList<>();
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "SELECT Loan_ID FROM Loan_Details WHERE Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setLong(1,userDetails.AccountNumber);
+            rs = statement.executeQuery();
+            while (rs.next()){
+                loanid.add(rs.getInt("Loan_ID"));
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return loanid.contains(loanID);
+    }
+
+    public static LoanDetails getLoanDetailsForPayment(int loanID){
+        LoanDetails loanDetails = new LoanDetails();
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "SELECT * FROM Loan_Details WHERE Loan_ID = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setInt(1,loanID);
+            rs = statement.executeQuery();
+            while(rs.next()){
+                loanDetails.loanID = loanID;
+                loanDetails.AccountNumber = userDetails.AccountNumber;
+                loanDetails.TypeofLoan = rs.getString("TypeOfLoan");
+                loanDetails.loanAmount = rs.getInt("Amount");
+                loanDetails.DurationInYears = rs.getInt("DurationInYears");
+                loanDetails.NumofMonthsRemaining = rs.getInt("MonthsRemaining");
+                loanDetails.Emi = rs.getDouble("EMIperMonth");
+                loanDetails.loanActive = rs.getBoolean("LoanActive");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }  finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return loanDetails;
+    }
+
+    public static void UpdateLoanDetails(int numOfMonthsRemaining,boolean LoanActive,int Loan_ID){
+        LoanDetails loanDetails = new LoanDetails();
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            connection1 = DriverManager.getConnection(Url, Username, Password);
+            String query = "UPDATE Loan_Details SET MonthsRemaining = ? AND LoanActive = ? WHERE Loan_ID = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setInt(1,numOfMonthsRemaining);
+            statement.setBoolean(2,LoanActive);
+            statement.setInt(3,Loan_ID);
+            int n = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }  finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

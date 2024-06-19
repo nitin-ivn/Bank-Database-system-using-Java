@@ -1,3 +1,4 @@
+import Model.LoanDetails;
 import Model.UserDetails;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
@@ -6,6 +7,7 @@ import services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Random;
 
 public class Main {
@@ -51,6 +53,7 @@ public class Main {
         DepositService depositService = new DepositService(homepage.getDepositPanel(),userDetails);
         FundTransferService fundTransferService =new FundTransferService(homepage.getFundTransferPanel(),userDetails);
         NewLoanService newLoanService = new NewLoanService(homepage.getNewloanFrame());
+        PaymentService paymentService = new PaymentService(homepage.getLoansPanel(),userDetails);
 
         homepage.LogoutButtonActionPerformed(new ActionListener() {
             @Override
@@ -137,6 +140,45 @@ public class Main {
                     homepage.getLoansPanel().setVehiclePanelTable(Database.getLoanDetails((String) homepage.getLoansPanel().comboBox.getSelectedItem()));
                 }else if(homepage.getLoansPanel().comboBox.getSelectedIndex() == 2){
                     homepage.getLoansPanel().setPersonalPanelTable(Database.getLoanDetails((String) homepage.getLoansPanel().comboBox.getSelectedItem()));
+                }
+            }
+        });
+
+        homepage.setNextPaymentButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(paymentService.validateNext()) {
+                    homepage.getLoansPanel().getPayLoanButton().setVisible(true);
+                }
+            }
+        });
+
+        homepage.setPayLoanButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int res = paymentService.setAmount();
+                if(paymentService.loanActive()){
+                    if(paymentService.getLoanDetails().NumofMonthsRemaining > Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()))){
+                        int num = paymentService.getLoanDetails().NumofMonthsRemaining - Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()));
+                        if(Database.getReceiverBalance(userDetails.AccountNumber) >= res){
+                            Database.UpdateLoanDetails(num,true,paymentService.getLoanDetails().loanID);
+                            Database.UpdateBalance((Database.getReceiverBalance(userDetails.AccountNumber) - res),userDetails.AccountNumber);
+                            Database.setBalance();
+                        }else{
+                            JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Insufficient Balance");
+                        }
+                    }else if(paymentService.getLoanDetails().NumofMonthsRemaining == Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()))){
+                        if(Database.getReceiverBalance(userDetails.AccountNumber) >= res){
+                            Database.UpdateLoanDetails(0,false,paymentService.getLoanDetails().loanID);
+                            Database.UpdateBalance(Database.getReceiverBalance(userDetails.AccountNumber) - res,userDetails.AccountNumber);
+                            Database.setBalance();
+                        }else{
+                            JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Insufficient Balance");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(homepage.getLoansPanel(),"You have less months remaining than you are trying to pay now");
+                    }
+                    JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Payment Completed Successfully");
                 }
             }
         });

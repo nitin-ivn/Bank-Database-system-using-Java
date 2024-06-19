@@ -13,6 +13,7 @@ import java.util.List;
 
 public class LoansPanel extends JPanel{
     String[] loans = {"Home Loans","Vehicle Loans","Personal Loans"};
+    String[] NumOfMonths = {"1","2","3","4","5","6","7","8","9"};
 
     private final Font labelfont = new Font("sansserif", Font.BOLD,10);
     Color bgcolor = new Color(71,75,75);
@@ -29,6 +30,11 @@ public class LoansPanel extends JPanel{
     public MyTextField LoanIdText = new MyTextField();
     public MyTextField AmountText = new MyTextField();
     public MyPasswordField pinText = new MyPasswordField();
+    public MyComboBox NoOfMonths = new MyComboBox(NumOfMonths);
+
+    public JLabel loanidlabel = new JLabel();
+    public JLabel pinlabel = new JLabel();
+    public JLabel nofMonlabel = new JLabel();
 
     public MyComboBox comboBox = new MyComboBox(loans);
     MyButton showbutton = new MyButton("Show");
@@ -36,6 +42,9 @@ public class LoansPanel extends JPanel{
     MyButton Paymentsbutton = new MyButton("Payments");
 
     MyButton newloanbutton = new MyButton("Apply");
+
+    MyButton NextPayment = new MyButton("Next");
+    MyButton PayLoan = new MyButton("Pay");
 
     public LoansPanel() {
         setBackground(Color.WHITE);
@@ -95,6 +104,8 @@ public class LoansPanel extends JPanel{
         Paymentsbutton.setFont(new Font("sansserif",Font.BOLD,18));
         add(Paymentsbutton,"width 100,height 40,pos 600 10");
         Paymentsbutton.setVisible(false);
+
+        setPayments();
     }
 
     public void setHomePanelTable(List<LoanDetails> loanDetails){
@@ -190,14 +201,52 @@ public class LoansPanel extends JPanel{
         HomeLoansPanel.setVisible(false);
         PersonalLoansPanel.setVisible(true);
         VehicleLoansPanel.setVisible(false);
-
     }
 
     public void setPayments(){
-        PaymentPanel.setVisible(true);
-        LoanIdText.setHint("Loan ID");
-        add(LoanIdText,"width 150,pos 10 10");
 
+        JLabel title = new JLabel("Payment");
+        title.setFont(new Font("sansserif",Font.BOLD,20));
+        title.setForeground(bgcolor);
+        PaymentPanel.add(title,"pos 10 10");
+
+        LoanIdText.setHint("Loan ID");
+        LoanIdText.setLimit(6);
+        PaymentPanel.add(LoanIdText,"width 190,pos 10 50");
+
+        loanidlabel.setFont(labelfont);
+        loanidlabel.setForeground(Color.RED);
+        PaymentPanel.add(loanidlabel,"pos 13 90");
+
+        NoOfMonths.setHint("Months");
+        NoOfMonths.setFocusable(false);
+        NoOfMonths.setSelectedIndex(-1);
+        PaymentPanel.add(NoOfMonths,"width 100,height 42,pos 205 50");
+
+        nofMonlabel.setFont(labelfont);
+        nofMonlabel.setForeground(Color.RED);
+        PaymentPanel.add(nofMonlabel,"pos 208 90");
+
+        AmountText.setHint("Amount");
+        AmountText.setFocusable(false);
+        PaymentPanel.add(AmountText,"width 170,pos 310 50");
+
+        pinText.setHint("Pin");
+        pinText.setLimit(4);
+        PaymentPanel.add(pinText,"width 100,pos 485 50");
+
+        pinlabel.setForeground(Color.RED);
+        pinlabel.setFont(labelfont);
+        PaymentPanel.add(pinlabel,"pos 488 90");
+
+        NextPayment.setFont(new Font("sansserif",Font.BOLD,20));
+        PaymentPanel.add(NextPayment,"width 100,height 40,pos 170 110");
+
+        PayLoan.setFont(new Font("sansserif",Font.BOLD,20));
+        PaymentPanel.add(PayLoan,"width 100,height 40,pos 300 110");
+        PayLoan.setVisible(false);
+
+        PaymentPanel.setVisible(true);
     }
 
     public NewLoanFrame getApplicationframe(){
@@ -206,6 +255,14 @@ public class LoansPanel extends JPanel{
 
     public JButton getApplybutton(){
         return newLoanFrame.getApplyButton();
+    }
+
+    public JButton getNextPaymentButton(){
+        return NextPayment;
+    }
+
+    public JButton getPayLoanButton(){
+        return PayLoan;
     }
 
     public LoansPanel getLoanPanel(){
