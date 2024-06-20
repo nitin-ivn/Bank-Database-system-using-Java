@@ -138,7 +138,7 @@ public class LoansPanel extends JPanel{
         JScrollPane scrollPane = new JScrollPane(table);
         HomeLoansPanel.add(scrollPane, BorderLayout.CENTER);
 
-
+        HomeLoansPanel.revalidate();
 
         HomeLoansPanel.setVisible(true);
         PersonalLoansPanel.setVisible(false);
@@ -172,6 +172,7 @@ public class LoansPanel extends JPanel{
         JScrollPane scrollPane = new JScrollPane(table);
         VehicleLoansPanel.add(scrollPane, BorderLayout.CENTER);
 
+        VehicleLoansPanel.revalidate();
 
         HomeLoansPanel.setVisible(false);
         PersonalLoansPanel.setVisible(false);
@@ -204,6 +205,8 @@ public class LoansPanel extends JPanel{
 
         JScrollPane scrollPane = new JScrollPane(table);
         PersonalLoansPanel.add(scrollPane, BorderLayout.CENTER);
+
+        PersonalLoansPanel.revalidate();
 
         HomeLoansPanel.setVisible(false);
         PersonalLoansPanel.setVisible(true);

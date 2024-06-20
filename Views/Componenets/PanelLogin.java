@@ -105,6 +105,7 @@ public class PanelLogin extends JLayeredPane {
             }
         });
         register.add(RAccountNumber,"width 400px, pos 50 170");
+        RAccountNumber.setLimit(12);
 
         LabelAccountNumber.setForeground(Color.RED);
         LabelAccountNumber.setFont(labelfont);
@@ -121,6 +122,7 @@ public class PanelLogin extends JLayeredPane {
             }
         });
         register.add(PhoneNumber,"width 190,pos 50 230");
+        PhoneNumber.setLimit(10);
 
         LabelPhoneNo.setForeground(Color.RED);
         LabelPhoneNo.setFont(labelfont);
@@ -203,6 +205,7 @@ public class PanelLogin extends JLayeredPane {
             }
         });
         login.add(LAccountNumber,"width 400, pos 50 220");
+        LAccountNumber.setLimit(12);
 
         LabelAccno.setForeground(Color.RED);
         LabelAccno.setFont(labelfont);

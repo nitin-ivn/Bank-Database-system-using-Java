@@ -11,6 +11,7 @@ import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FundTransferPanel extends JPanel{
     UserDetails userDetails;
@@ -132,6 +133,7 @@ public class FundTransferPanel extends JPanel{
     public void showTransactionHistory(List<Transactions> transactionsList) {
         JFrame transactionHistoryFrame = new JFrame("Transaction History");
         transactionHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        transactionHistoryFrame.setResizable(false);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -153,7 +155,7 @@ public class FundTransferPanel extends JPanel{
             Transactions transactions = transactionsList.get(i);
             if (transactions.receivers_AccountNo == userDetails.AccountNumber && transactions.senders_AccountNo != userDetails.AccountNumber) {
                 model.addRow(new Object[]{"Funds Received", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, "+"+transactions.amount});
-            }else if(transactions.receivers_AccountNo == userDetails.AccountNumber){
+            }else if(transactions.receivers_AccountNo == userDetails.AccountNumber && Objects.equals(transactions.transactionperformed, "Deposit")){
                 model.addRow(new Object[]{"Deposit", transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time, "+"+transactions.amount});
             }else{
                 model.addRow(new Object[]{transactions.transactionperformed, transactions.senders_AccountNo, transactions.receivers_AccountNo, transactions.date, transactions.time,"-"+ transactions.amount});

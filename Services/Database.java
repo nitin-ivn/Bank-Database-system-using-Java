@@ -537,7 +537,6 @@ public class Database {
         try {
             connection1 = DriverManager.getConnection(Url, Username, Password);
             String query = "UPDATE Loan_Details SET MonthsRemaining = ?,LoanActive = ? WHERE Loan_ID = ?";
-            System.out.println(numOfMonthsRemaining);
             statement = connection1.prepareStatement(query);
             statement.setInt(1,numOfMonthsRemaining);
             statement.setBoolean(2,LoanActive);

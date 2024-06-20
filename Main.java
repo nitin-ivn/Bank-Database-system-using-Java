@@ -7,6 +7,7 @@ import services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -153,7 +154,7 @@ public class Main {
                 }
             }
         });
-
+        final boolean[] PaymentDone = {false};
         homepage.setPayLoanButtonActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -162,25 +163,35 @@ public class Main {
                     if(paymentService.getLoanDetails().NumofMonthsRemaining > Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()))){
                         int num = paymentService.getLoanDetails().NumofMonthsRemaining - Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()));
                         if(Database.getReceiverBalance(userDetails.AccountNumber) >= res){
+                            Database.insertTransactions(paymentService.getTransaction());
                             Database.UpdateLoanDetails(num,true,paymentService.getLoanDetails().loanID);
                             Database.UpdateBalance((Database.getReceiverBalance(userDetails.AccountNumber) - res),userDetails.AccountNumber);
                             Database.setBalance();
+                            PaymentDone[0] = true;
                         }else{
                             JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Insufficient Balance");
                         }
                     }else if(paymentService.getLoanDetails().NumofMonthsRemaining == Integer.parseInt((String) Objects.requireNonNull(homepage.getLoansPanel().NoOfMonths.getSelectedItem()))){
                         if(Database.getReceiverBalance(userDetails.AccountNumber) >= res){
+                            Database.insertTransactions(paymentService.getTransaction());
                             Database.UpdateLoanDetails(0,false,paymentService.getLoanDetails().loanID);
                             Database.UpdateBalance(Database.getReceiverBalance(userDetails.AccountNumber) - res,userDetails.AccountNumber);
                             Database.setBalance();
+                            PaymentDone[0] = true;
                         }else{
                             JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Insufficient Balance");
                         }
                     }else{
                         JOptionPane.showMessageDialog(homepage.getLoansPanel(),"You have less months remaining than you are trying to pay now");
                     }
-                    JOptionPane.showMessageDialog(homepage.getLoansPanel(),"Payment Completed Successfully");
+                    if(PaymentDone[0]) {
+                        JOptionPane.showMessageDialog(homepage.getLoansPanel(), "Payment Completed Successfully");
+                    }
                 }
+                homepage.getLoansPanel().LoanIdText.setText("");
+                homepage.getLoansPanel().AmountText.setText("");
+                homepage.getLoansPanel().pinText.setText("");
+                homepage.getLoansPanel().LoanIdText.setFocusable(true);
             }
         });
     }
