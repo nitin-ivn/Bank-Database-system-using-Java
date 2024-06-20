@@ -5,6 +5,7 @@ import Model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class Database {
@@ -68,7 +69,7 @@ public class Database {
             statement.setString(2, registerDetails.LastName);
             statement.setLong(3, registerDetails.PhoneNumber);
             statement.setString(4, registerDetails.Email);
-            statement.setString(5, registerDetails.Password);
+            statement.setString(5, encryptPassword(registerDetails.Password));
 
             java.sql.Date sqldate = new java.sql.Date(registerDetails.DOB.getTime());
             statement.setDate(6, sqldate);
@@ -92,6 +93,7 @@ public class Database {
             if (rs.next()) {
                 pass = rs.getString("User_Password");
             }
+            pass = decryptPassword(pass);
             validpassword = password.equals(pass);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -556,5 +558,14 @@ public class Database {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private static String encryptPassword(String password) {
+        return Base64.getEncoder().encodeToString(password.getBytes());
+    }
+
+    private static String decryptPassword(String encryptedPassword) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encryptedPassword);
+        return new String(decodedBytes);
     }
 }

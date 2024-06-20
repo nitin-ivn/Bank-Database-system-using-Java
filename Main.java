@@ -1,4 +1,4 @@
-import Model.LoanDetails;
+
 import Model.UserDetails;
 import Views.Pages.HomePage;
 import Views.Pages.LoginAndRegisterPage;
@@ -7,7 +7,7 @@ import services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+
 import java.util.Objects;
 import java.util.Random;
 
