@@ -560,6 +560,88 @@ public class Database {
         }
     }
 
+    public static void UpdateUserDetails(UserDetails userDetails1){
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "UPDATE User_Details SET User_FirstName = ?,User_LastName = ?,User_PhoneNo = ?,User_email = ? WHERE Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setString(1,userDetails1.FirstName);
+            statement.setString(2,userDetails1.LastName);
+            statement.setLong(3,userDetails1.PhoneNo);
+            statement.setString(4,userDetails1.Email);
+            statement.setLong(5,userDetails.AccountNumber);
+            int n = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void UpdatePasswordDetails(String password){
+        String encpass = encryptPassword(password);
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "UPDATE User_Details SET User_Password = ? WHERE Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setString(1,encpass);
+            statement.setLong(2,userDetails.AccountNumber);
+            int n = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void UpdatePinDetails(int pin){
+        Connection connection1 = null;
+        PreparedStatement statement = null;
+        try {
+            connection1 = DriverManager.getConnection(Url,Username,Password);
+            String query = "UPDATE User_Details SET PIN = ? WHERE Account_Number = ?";
+            statement = connection1.prepareStatement(query);
+            statement.setInt(1,pin);
+            statement.setLong(2,userDetails.AccountNumber);
+            int n = statement.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection1 != null) {
+                    connection1.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     private static String encryptPassword(String password) {
         return Base64.getEncoder().encodeToString(password.getBytes());
     }

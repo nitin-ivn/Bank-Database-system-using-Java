@@ -48,7 +48,7 @@ public class AccountDetailsPanel extends JPanel {
 
         firstnameValue.setForeground(bgcolor);
         firstnameValue.setFont(new Font("sansserif", Font.BOLD, 20));
-        firstnameValue.setText("userDetails.FirstName");
+        firstnameValue.setText(userDetails.FirstName);
         add(firstnameValue,"pos 350 140");
 
         LastName.setForeground(labelcolor);
@@ -57,7 +57,7 @@ public class AccountDetailsPanel extends JPanel {
 
         lastnameValue.setForeground(bgcolor);
         lastnameValue.setFont(new Font("sansserif", Font.BOLD, 20));
-        lastnameValue.setText("userDetails.LastName");
+        lastnameValue.setText(userDetails.LastName);
         add(lastnameValue,"pos 350 190");
 
         AccountNumber.setForeground(labelcolor);
@@ -66,7 +66,7 @@ public class AccountDetailsPanel extends JPanel {
 
         accountnumbervalue.setForeground(bgcolor);
         accountnumbervalue.setFont(new Font("sansserif", Font.BOLD, 20));
-        accountnumbervalue.setText("userDetails.AccountNo");
+        accountnumbervalue.setText(String.valueOf(userDetails.AccountNumber));
         add(accountnumbervalue,"pos 350 240");
 
         DOB.setForeground(labelcolor);
@@ -75,7 +75,7 @@ public class AccountDetailsPanel extends JPanel {
 
         dobvalue.setForeground(bgcolor);
         dobvalue.setFont(new Font("sansserif", Font.BOLD, 20));
-        dobvalue.setText("userDetails.DOB");
+        dobvalue.setText(String.valueOf(userDetails.DOB));
         add(dobvalue,"pos 350 290");
 
         Phonenumber.setForeground(labelcolor);
@@ -84,7 +84,7 @@ public class AccountDetailsPanel extends JPanel {
 
         phonenumbervalue.setForeground(bgcolor);
         phonenumbervalue.setFont(new Font("sansserif", Font.BOLD, 20));
-        phonenumbervalue.setText("userDetails.Phone");
+        phonenumbervalue.setText(String.valueOf(userDetails.PhoneNo));
         add(phonenumbervalue,"pos 350 340");
 
         Email.setForeground(labelcolor);
@@ -93,7 +93,7 @@ public class AccountDetailsPanel extends JPanel {
 
         emailvalue.setForeground(bgcolor);
         emailvalue.setFont(new Font("sansserif", Font.BOLD, 20));
-        emailvalue.setText("userDetails.Email");
+        emailvalue.setText(userDetails.Email);
         add(emailvalue,"pos 350 390");
 
         CheckBalanceButton.setFont(new Font("sansserif",Font.BOLD,18));
@@ -108,6 +108,10 @@ public class AccountDetailsPanel extends JPanel {
         int lineWidth = AccountDetails.getWidth() + 170; // Adjust for the extension on both sides
         int lineHeight = 2; // Adjust the height of the line as needed
         g.fillRect(lineX, lineY, lineWidth, lineHeight);
+    }
+
+    public void revalidatePanel(){
+        revalidate();
     }
 
     public JButton getCheckBalanceButton(){

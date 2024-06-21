@@ -16,7 +16,7 @@ public class Main {
     static HomePage homepage;
     static UserDetails userDetails;
     public static void main(String[] args) {
-        setHomepage();
+        Loginpage();
     }
     public static void Loginpage(){
         loginAndRegisterPage = new LoginAndRegisterPage();
@@ -73,9 +73,42 @@ public class Main {
                         int pin = random();
                         JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Address is Set Successfully and your PIN is "+pin);
                         Database.SetUserPin(pin);
+                        Database.setpin();
                     }else{
                         JOptionPane.showMessageDialog(homepage.getProfilePanel(),"Address is Updated Successfully");
                     }
+                }
+            }
+        });
+
+        homepage.setUpdateDetailsActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(profile.validateUserDetails()) {
+                    Database.UpdateUserDetails(profile.getUserDetails());
+                    homepage.getAccountspanel().revalidatePanel();
+                    JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Details Updated Successfully");
+                }
+            }
+        });
+
+        homepage.setpinActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(profile.validatePinDetails()) {
+                    Database.UpdatePinDetails(profile.getPin());
+                    Database.setpin();
+                    JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Pin Updated Successfully");
+                }
+            }
+        });
+
+        homepage.setUpdatePasswordActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(profile.validatePasswordDetails()) {
+                    Database.UpdatePasswordDetails(profile.getPassword());
+                    JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Password Updated Successfully");
                 }
             }
         });
