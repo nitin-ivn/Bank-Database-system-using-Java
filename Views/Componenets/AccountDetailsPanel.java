@@ -33,7 +33,11 @@ public class AccountDetailsPanel extends JPanel {
 
     MyButton CheckBalanceButton = new MyButton("Check Balance");
 
-    public AccountDetailsPanel(UserDetails userDetails) {
+    public void setUserDetails(UserDetails userDetails){
+        this.userDetails = userDetails;
+    }
+
+    public void gui() {
         setBackground(Color.WHITE);
         setLayout(new MigLayout("fill"));
         AccountDetails.setForeground(bgcolor);

@@ -39,7 +39,9 @@ public class HomePage {
         depositPanel = new DepositPanel();
         loansPanel = new LoansPanel();
         fundTransferPanel = new FundTransferPanel(userDetails);
-        accountspanel = new AccountDetailsPanel(userDetails);
+        accountspanel = new AccountDetailsPanel();
+        accountspanel.setUserDetails(userDetails);
+        accountspanel.gui();
         profilePanel = new ProfilePanel(userDetails);
         this.userDetails = userDetails;
         layout = new MigLayout("insets 0, fill,wrap");

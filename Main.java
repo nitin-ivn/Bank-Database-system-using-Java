@@ -86,6 +86,9 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 if(profile.validateUserDetails()) {
                     Database.UpdateUserDetails(profile.getUserDetails());
+                    userDetails = Database.setUserDetails(userDetails.AccountNumber);
+                    homepage.getAccountspanel().setUserDetails(userDetails);
+                    homepage.getAccountspanel().gui();
                     homepage.getAccountspanel().revalidatePanel();
                     JOptionPane.showMessageDialog(homepage.getProfilePanel(), "Details Updated Successfully");
                 }
